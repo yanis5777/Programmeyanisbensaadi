@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Yanis — Performance</title>
+<link rel="apple-touch-icon" href="icon_yanis.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Yanis 🔥">
+<meta name="theme-color" content="#0A0A0A">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#C9A84C;--gold-light:#E8C56A;--gold-dim:#8A6A2A;--white:#FFFFFF;--light:#C8BCA0;--muted:#887A60;--bg:#0A0A0A;--bg2:#111108;--card:rgba(255,255,255,0.04);--border:rgba(201,168,76,0.20)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.65;max-width:430px;margin:0 auto;overflow-x:hidden}
+
+.hero{min-height:100svh;background:linear-gradient(170deg,#0A0A0A 0%,#1A1508 50%,#0A0A0A 100%);position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:40px 28px 52px;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-100px;right:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(201,168,76,0.18) 0%,transparent 65%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.40);border-radius:4px;padding:6px 14px;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;width:fit-content}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:0.95;letter-spacing:2px;color:var(--white);margin-bottom:6px}
+.hero h1 span{color:var(--gold)}
+.hero-sub{font-size:13px;color:var(--light);margin-bottom:28px;font-weight:400;letter-spacing:0.04em}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+.hstat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 16px}
+.hv{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;color:var(--white)}
+.hl{font-size:10px;color:var(--light);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-top:2px}
+
+.race-block{display:flex;flex-direction:column;gap:8px}
+.race-card{background:rgba(201,168,76,0.10);border:1px solid rgba(201,168,76,0.30);border-radius:14px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between}
+.race-info .race-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--gold-light)}
+.race-info .race-date{font-size:12px;color:var(--light);font-weight:500;margin-top:2px}
+.race-countdown{text-align:right}
+.race-days{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:1px;color:var(--white);line-height:1}
+.race-unit{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-weight:700}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,168,76,0.12);padding:0 8px;overflow-x:auto;scrollbar-width:none;display:flex;gap:0}
+.nav::-webkit-scrollbar{display:none}
+.nb{flex-shrink:0;padding:12px 11px;font-size:10px;font-weight:700;letter-spacing:0.06em;color:var(--muted);background:none;border:none;cursor:pointer;white-space:nowrap;transition:color 0.2s;font-family:'DM Sans',sans-serif;text-transform:uppercase}
+.nb.on{color:var(--gold)}
+
+.sec{padding:44px 24px;border-top:1px solid rgba(255,255,255,0.04)}
+.sec:nth-child(odd){background:linear-gradient(180deg,#0A0A0A,#111108,#0A0A0A)}
+.sec:nth-child(even){background:linear-gradient(180deg,#0D0D08,#141208,#0D0D08)}
+.stag{font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.stitle{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:2px;line-height:1.0;color:var(--white);margin-bottom:26px}
+.subh{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;color:var(--white);margin:24px 0 12px}
+
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:22px}
+.wd{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:10px 4px;text-align:center}
+.wd.hyrox{background:rgba(201,168,76,0.15);border-color:rgba(201,168,76,0.40)}
+.wd.run{background:rgba(80,160,255,0.12);border-color:rgba(80,160,255,0.30)}
+.wd.muscu{background:rgba(80,220,120,0.10);border-color:rgba(80,220,120,0.25)}
+.wd.legs{background:rgba(200,80,255,0.10);border-color:rgba(200,80,255,0.28)}
+.wd.velo{background:rgba(255,160,40,0.10);border-color:rgba(255,160,40,0.25)}
+.wd-day{font-size:9px;font-weight:800;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase}
+.wd-ico{font-size:16px;margin:3px 0}
+.wd-type{font-size:8px;font-weight:700;color:var(--light);letter-spacing:0.03em}
+.wd.hyrox .wd-type{color:var(--gold)}
+.wd.run .wd-type{color:#60A8FF}
+.wd.muscu .wd-type{color:#50DC78}
+.wd.legs .wd-type{color:#C850FF}
+.wd.velo .wd-type{color:#FFA028}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:10px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.card-label{font-size:11px;color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px}
+
+.t-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;overflow:hidden}
+.t-card.muscu{background:rgba(80,220,120,0.04);border-color:rgba(80,220,120,0.20)}
+.t-card.muscu .t-ico{background:linear-gradient(135deg,rgba(80,220,120,0.25),rgba(80,220,120,0.06))}
+.t-card.muscu .t-inf{color:#50DC78}
+.t-card.hyrox{background:rgba(201,168,76,0.06);border-color:rgba(201,168,76,0.25)}
+.t-card.hyrox .t-ico{background:linear-gradient(135deg,rgba(201,168,76,0.30),rgba(201,168,76,0.08))}
+.t-card.hyrox .t-inf{color:var(--gold-light)}
+.t-card.run{background:rgba(80,160,255,0.04);border-color:rgba(80,160,255,0.20)}
+.t-card.run .t-ico{background:linear-gradient(135deg,rgba(80,160,255,0.25),rgba(80,160,255,0.06))}
+.t-card.run .t-inf{color:#60A8FF}
+.t-card.legs{background:rgba(200,80,255,0.04);border-color:rgba(200,80,255,0.20)}
+.t-card.legs .t-ico{background:linear-gradient(135deg,rgba(200,80,255,0.25),rgba(200,80,255,0.06))}
+.t-card.legs .t-inf{color:#C850FF}
+.t-card.velo{background:rgba(255,160,40,0.04);border-color:rgba(255,160,40,0.20)}
+.t-card.velo .t-ico{background:linear-gradient(135deg,rgba(255,160,40,0.25),rgba(255,160,40,0.06))}
+.t-card.velo .t-inf{color:#FFA028}
+.t-hd{padding:15px 16px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.t-ico{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,rgba(201,168,76,0.25),rgba(201,168,76,0.08));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.t-nm{font-size:14px;font-weight:700;color:var(--white);flex:1}
+.t-inf{font-size:11px;color:var(--gold);font-weight:600;margin-top:2px}
+.chv{color:var(--muted);font-size:12px;transition:transform 0.3s}
+.t-card.open .chv{transform:rotate(180deg)}
+.t-bd{display:none;padding:4px 16px 16px;border-top:1px solid rgba(255,255,255,0.05)}
+.t-card.open .t-bd{display:block}
+.ex-row{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.ex-row:last-child{border-bottom:none}
+.ex-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);margin-top:9px;flex-shrink:0}
+.ex-nm{font-size:14px;font-weight:600;color:var(--white)}
+.ex-dt{font-size:12px;color:var(--light);margin-top:2px}
+.ex-bd{margin-left:auto;padding:3px 9px;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.28);border-radius:50px;font-size:11px;font-weight:700;color:var(--gold-light);flex-shrink:0}
+.ex-tag{margin-left:4px;padding:2px 7px;background:rgba(80,220,120,0.12);border:1px solid rgba(80,220,120,0.25);border-radius:50px;font-size:10px;font-weight:700;color:#50DC78;flex-shrink:0}
+.fin{margin-top:10px;padding:9px 12px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.20);border-radius:8px;font-size:12px;color:var(--gold);font-weight:600}
+.t-txt{font-size:14px;color:var(--light);line-height:1.7;padding-top:10px}
+.abs-section{margin-top:14px;padding-top:14px;border-top:1px solid rgba(201,168,76,0.15)}
+.abs-title{font-size:11px;font-weight:800;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px}
+
+.stretch-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;margin-bottom:8px;overflow:hidden}
+.str-hd{padding:13px 15px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.str-ico{font-size:20px;flex-shrink:0}
+.str-nm{font-size:14px;font-weight:700;color:var(--white);flex:1}
+.str-dur{font-size:11px;color:var(--gold);font-weight:700}
+.str-bd{display:none;padding:4px 15px 14px;border-top:1px solid rgba(255,255,255,0.04)}
+.stretch-card.open .str-bd{display:block}
+.str-how{font-size:13px;color:var(--light);line-height:1.65;margin-top:8px}
+.str-tip{margin-top:8px;padding:8px 10px;background:rgba(201,168,76,0.07);border-left:2px solid var(--gold);border-radius:0 6px 6px 0;font-size:12px;color:var(--gold-light);font-style:italic}
+
+.f-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;margin-bottom:10px;overflow:hidden}
+.f-hd{padding:15px 16px;display:flex;justify-content:space-between;align-items:flex-start;cursor:pointer}
+.f-title{font-size:15px;font-weight:700;color:var(--white)}
+.f-mac{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.mc{font-size:10px;color:var(--white);background:rgba(255,255,255,0.08);padding:2px 8px;border-radius:50px;font-weight:700}
+.mc span{color:var(--gold-light)}
+.f-bd{display:none;padding:0 16px 16px;border-top:1px solid rgba(255,255,255,0.05)}
+.f-card.open .f-bd{display:block}
+.meal{margin-top:12px}
+.mlbl{font-size:9px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.mnm{font-size:14px;font-weight:700;color:var(--white)}
+.ming{font-size:12px;color:var(--light);margin-top:2px;line-height:1.5}
+.mwhy{font-size:11px;color:var(--muted);font-style:italic;margin-top:3px}
+
+.batch-row{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.batch-row:last-child{border-bottom:none}
+.b-chk{width:24px;height:24px;border:2px solid rgba(201,168,76,0.40);border-radius:7px;flex-shrink:0;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--bg)}
+.b-chk.on{background:var(--gold);border-color:var(--gold)}
+.b-nm{font-size:14px;font-weight:700;color:var(--white)}
+.b-dt{font-size:11px;color:var(--light);margin-top:2px}
+.b-qty{font-size:11px;font-weight:700;color:var(--gold);background:rgba(201,168,76,0.10);border:1px solid rgba(201,168,76,0.20);padding:2px 8px;border-radius:50px;flex-shrink:0;align-self:flex-start;margin-top:2px}
+
+.sg{margin-bottom:22px}
+.sg-title{font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;padding:4px 12px;border-radius:4px;display:inline-block}
+.sg-title.p1{background:rgba(201,168,76,0.15);color:var(--gold-light);border:1px solid rgba(201,168,76,0.35)}
+.sg-title.p2{background:rgba(80,160,255,0.12);color:#80C0FF;border:1px solid rgba(80,160,255,0.28)}
+.sg-title.p3{background:rgba(200,80,255,0.10);color:#D080FF;border:1px solid rgba(200,80,255,0.25)}
+.s-row{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05);align-items:flex-start}
+.s-row:last-child{border-bottom:none}
+.s-chk{width:24px;height:24px;border:2px solid rgba(201,168,76,0.35);border-radius:7px;flex-shrink:0;margin-top:2px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--bg)}
+.s-chk.on{background:var(--gold);border-color:var(--gold)}
+.s-nm{font-size:14px;font-weight:700;color:var(--white)}
+.s-time{font-size:11px;color:var(--light);margin-top:3px;line-height:1.5}
+.s-why{font-size:11px;color:var(--muted);font-style:italic;margin-top:2px}
+
+.timing-row{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.timing-row:last-child{border-bottom:none}
+.timing-icon{font-size:20px;flex-shrink:0;width:28px;text-align:center}
+.timing-label{font-size:13px;font-weight:700;color:var(--white)}
+.timing-items{font-size:12px;color:var(--light);margin-top:3px;line-height:1.6}
+
+.course-cat{margin-bottom:18px}
+.course-cat-title{font-size:10px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.course-item{display:flex;align-items:center;gap:12px;padding:9px 12px;margin-bottom:5px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;cursor:pointer;transition:all 0.2s}
+.course-item.done{background:rgba(201,168,76,0.06);border-color:rgba(201,168,76,0.20)}
+.ci-chk{width:20px;height:20px;border:2px solid rgba(201,168,76,0.35);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--bg);transition:all 0.2s}
+.course-item.done .ci-chk{background:var(--gold);border-color:var(--gold)}
+.ci-name{font-size:13px;font-weight:600;color:var(--white);flex:1}
+.course-item.done .ci-name{color:var(--muted);text-decoration:line-through}
+.ci-qty{font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0}
+
+.w-block{background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.25);border-radius:14px;padding:18px;margin-bottom:12px}
+.w-lbl{font-size:10px;color:var(--light);font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em}
+.w-disp{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:2px;color:var(--white);line-height:1}
+.w-disp span{font-size:22px;color:var(--muted);font-family:'DM Sans',sans-serif}
+.w-ctrls{display:flex;gap:8px;margin-top:12px}
+.w-btn{flex:1;padding:11px;border-radius:11px;border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s}
+.w-btn.m{background:rgba(255,255,255,0.07);color:var(--white)}
+.w-btn.p{background:var(--gold);color:var(--bg)}
+.w-btn:active{transform:scale(0.95)}
+.save-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--gold),#8A6A2A);color:var(--bg);border:none;border-radius:13px;font-size:15px;font-weight:800;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s}
+.save-btn:active{transform:scale(0.97)}
+.h-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:12px 0 5px}
+.h-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.h-date{font-size:12px;color:var(--light)}
+.h-val{font-size:14px;font-weight:700;color:var(--white)}
+.h-diff{font-size:11px;font-weight:700}
+.h-diff.neg{color:#50D080}
+.h-diff.pos{color:#FF7070}
+.mes-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.mes-lbl{font-size:13px;color:var(--light);font-weight:600;flex:1}
+.mes-inp{width:80px;padding:9px 10px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);border-radius:10px;color:var(--white);font-size:15px;font-weight:700;font-family:'DM Sans',sans-serif;text-align:center}
+.mes-inp:focus{outline:none;border-color:var(--gold)}
+.mes-unit{font-size:11px;color:var(--muted);font-weight:600;width:24px}
+
+.sc-card{display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;cursor:pointer;transition:all 0.2s;margin-bottom:8px}
+.sc-card.done{background:rgba(201,168,76,0.08);border-color:rgba(201,168,76,0.28)}
+.sc-ico{font-size:20px;flex-shrink:0}
+.sc-nm{font-size:14px;font-weight:700;color:var(--white);flex:1}
+.sc-chk{width:24px;height:24px;border:2px solid rgba(255,255,255,0.20);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--bg);flex-shrink:0;transition:all 0.2s}
+.sc-card.done .sc-chk{background:var(--gold);border-color:var(--gold)}
+
+.ess-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:10px}
+.ess-card.testo{background:rgba(201,168,76,0.05);border-color:rgba(201,168,76,0.25)}
+.ess-card.peau{background:rgba(80,160,255,0.04);border-color:rgba(80,160,255,0.20)}
+.ess-card.recup{background:rgba(200,80,255,0.04);border-color:rgba(200,80,255,0.18)}
+.ess-card.perf{background:rgba(80,220,120,0.04);border-color:rgba(80,220,120,0.20)}
+.ess-title{font-size:14px;font-weight:700;color:var(--gold-light);margin-bottom:10px}
+.ess-card.peau .ess-title{color:#80C0FF}
+.ess-card.recup .ess-title{color:#D080FF}
+.ess-card.perf .ess-title{color:#50DC78}
+.ess-item{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.ess-item:last-child{border-bottom:none}
+.ess-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);margin-top:9px;flex-shrink:0}
+.ess-card.peau .ess-dot{background:#80C0FF}
+.ess-card.recup .ess-dot{background:#D080FF}
+.ess-card.perf .ess-dot{background:#50DC78}
+.ess-text{font-size:13px;color:var(--light);line-height:1.55}
+.ess-text strong{color:var(--white)}
+
+.r-row{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.r-ico{font-size:17px;flex-shrink:0;width:24px;text-align:center;margin-top:2px}
+.r-nm{font-size:13px;font-weight:700;color:var(--white)}
+.r-desc{font-size:11px;color:var(--light);margin-top:2px;line-height:1.5}
+
+.footer{text-align:center;padding:48px 24px 70px;background:linear-gradient(180deg,#0A0A0A,#111108)}
+.footer-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--white);margin-bottom:8px}
+.footer-sub{font-size:12px;color:var(--light);line-height:1.7;margin-bottom:28px}
+.legal{margin-top:24px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.06)}
+.legal-text{font-size:10px;color:var(--muted);line-height:1.7}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero>*{animation:fadeUp 0.6s ease both}
+.hero-tag{animation-delay:0.1s}.hero h1{animation-delay:0.2s}.hero-sub{animation-delay:0.3s}.hero-grid{animation-delay:0.35s}.race-block{animation-delay:0.4s}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-tag">🏅 Hyrox · Semi · Masse Sèche</div>
+  <h1>YANIS<br><span>PERFORMANCE</span></h1>
+  <p class="hero-sub">Prise de masse sèche · Endurance · Testostérone · Longévité</p>
+  <div class="hero-grid">
+    <div class="hstat"><div class="hv">2 450</div><div class="hl">kcal / jour</div></div>
+    <div class="hstat"><div class="hv">200 g</div><div class="hl">Protéines / jour</div></div>
+    <div class="hstat"><div class="hv">7</div><div class="hl">Séances / sem</div></div>
+    
+  </div>
+  <div class="race-block">
+    <div class="race-card">
+      <div class="race-info">
+        <div class="race-title">🏃 SEMI-MARATHON</div>
+        <div class="race-date">16 Mai 2026 · Luxembourg</div>
+      </div>
+      <div class="race-countdown">
+        <div class="race-days" id="semiDays">—</div>
+        <div class="race-unit">jours</div>
+      </div>
+    </div>
+    <div class="race-card">
+      <div class="race-info">
+        <div class="race-title">🏅 HYROX</div>
+        <div class="race-date">29 Mai 2026 · Rimini, Italie</div>
+      </div>
+      <div class="race-countdown">
+        <div class="race-days" id="hyroxDays">—</div>
+        <div class="race-unit">jours</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="nav">
+  <button class="nb on" onclick="navTo('planning',this)">Planning</button>
+  <button class="nb" onclick="navTo('training',this)">Training</button>
+  <button class="nb" onclick="navTo('etirements',this)">Étirements</button>
+  <button class="nb" onclick="navTo('nutrition',this)">Nutrition</button>
+  <button class="nb" onclick="navTo('batch',this)">Batch</button>
+  <button class="nb" onclick="navTo('suppl',this)">Compléments</button>
+  <button class="nb" onclick="navTo('courses',this)">Courses</button>
+  <button class="nb" onclick="navTo('essentiels',this)">Essentiels</button>
+  <button class="nb" onclick="navTo('tracker',this)">Mesures</button>
+</nav>
+
+<!-- PLANNING -->
+<section class="sec" id="planning">
+  <div class="stag">Vue hebdomadaire</div>
+  <h2 class="stitle">PLANNING<br>SEMAINE</h2>
+
+  <div class="week-grid">
+    <div class="wd muscu"><div class="wd-day">Lun</div><div class="wd-ico">🏋️</div><div class="wd-type">Push</div></div>
+    <div class="wd hyrox"><div class="wd-day">Mar</div><div class="wd-ico">🏅</div><div class="wd-type">Hyrox</div></div>
+    <div class="wd muscu"><div class="wd-day">Mer</div><div class="wd-ico">🔗</div><div class="wd-type">Pull</div></div>
+    <div class="wd run"><div class="wd-day">Jeu</div><div class="wd-ico">🏃</div><div class="wd-type">Run Z2</div></div>
+    <div class="wd legs"><div class="wd-day">Ven</div><div class="wd-ico">🦵</div><div class="wd-type">Legs</div></div>
+    <div class="wd hyrox"><div class="wd-day">Sam</div><div class="wd-ico">🏅</div><div class="wd-type">Hyrox</div></div>
+    <div class="wd velo"><div class="wd-day">Dim</div><div class="wd-ico">🚴</div><div class="wd-type">Vélo/Run</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">🏅 Fixes</div>
+    <div style="font-size:13px;color:var(--light);line-height:1.9;">
+      <strong style="color:var(--white);">Mardi 19h00</strong> — Hyrox collectif<br>
+      <strong style="color:var(--white);">Samedi midi</strong> — Hyrox collectif
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-label">💪 Muscu modulable</div>
+    <div style="font-size:13px;color:var(--light);line-height:1.9;">
+      <strong style="color:var(--white);">Lundi</strong> — Push · Poitrine, Épaules, Triceps + Abdos<br>
+      <strong style="color:var(--white);">Mercredi</strong> — Pull · Dos, Biceps + Abdos<br>
+      <strong style="color:var(--white);">Vendredi</strong> — Legs · Squats, Ischios, Fessiers + Abdos
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-label">🏃 Cardio outdoor</div>
+    <div style="font-size:13px;color:var(--light);line-height:1.9;">
+      <strong style="color:var(--white);">Jeudi</strong> — Course à pied Zone 2 · 45-60 min<br>
+      <strong style="color:var(--white);">Dimanche</strong> — Vélo plaisir ou course légère<br>
+      <strong style="color:var(--white);">Si pluie dimanche</strong> — Repos actif ou tapis Z2
+    </div>
+  </div>
+</section>
+
+<!-- TRAINING -->
+<section class="sec" id="training">
+  <div class="stag">7 séances · Optimisé Hyrox + Masse sèche</div>
+  <h2 class="stitle">PROGRAMME<br>ENTRAÎNEMENTS</h2>
+
+  <!-- LUNDI PUSH -->
+  <div class="t-card muscu" onclick="toggleT(this)">
+    <div class="t-hd">
+      <div class="t-ico">🏋️</div>
+      <div style="flex:1"><div class="t-nm">Lundi — Push + Abdos</div><div class="t-inf">Poitrine · Épaules · Triceps · Core · <strong style="color:var(--white);">~80 min</strong></div></div>
+      <span class="chv">▼</span>
+    </div>
+    <div class="t-bd">
+      <div style="font-size:10px;color:var(--muted);padding:8px 0 4px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">— Poitrine —</div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Développé couché haltères</div><div class="ex-dt">Amplitude complète · 3s descente · repos 2-3 min</div></div><div class="ex-bd">4×6-8</div></div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Développé incliné haltères</div><div class="ex-dt">30° · upper chest · contrôle</div></div><div class="ex-bd">3×10</div></div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Écarté câble ou Pec deck</div><div class="ex-dt">Étirement pectoral max · squeeze en haut</div></div><div class="ex-bd">3×12</div></div>
+      <div style="font-size:10px;color:var(--muted);padding:10px 0 4px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">— Épaules —</div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Développé militaire haltères</div><div class="ex-dt">Debout · core engagé · explosif en montée</div></div><div class="ex-bd">4×8-10</div></div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Élévations latérales haltères</div><div class="ex-dt">2s montée · 3s descente · coudes légèrement fléchis</div></div><div class="ex-bd">4×12-15</div></div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Face pull câble</div><div class="ex-dt">Santé coiffe rotateurs · rotation externe · ESSENTIEL</div></div><div class="ex-bd">3×15</div><div class="ex-tag">Santé</div></div>
+      <div style="font-size:10px;color:var(--muted);padding:10px 0 4px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">— Triceps —</div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Barre front press (Skull crusher)</div><div class="ex-dt">Coudes fixes · amplitude complète · long chef</div></div><div class="ex-bd">3×10-12</div></div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Dips lestés ou poids de corps</div><div class="ex-dt">Poitrine vers l'avant · amplitude complète</div></div><div class="ex-bd">3×8-10</div></div>
+      <div class="abs-section">
+        <div class="abs-title">Core & Abdos — 15 min</div>
+        <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Planche dynamique + shoulder tap</div><div class="ex-dt">Core stabilisateur · transfert force Hyrox</div></div><div class="ex-bd">3×40s</div></div>
+        <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Relevé de jambes suspendu</div><div class="ex-dt">Bas du ventre · contrôle descente</div></div><div class="ex-bd">3×12</div></div>
+        <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Russian twist lesté</div><div class="ex-dt">Pieds levés · rotation complète · obliques</div></div><div class="ex-bd">3×20</div></div>
+      </div>
+      <div class="fin">⚡ Finition : 10 min vélo ou rameur niveau 7</div>
+    </div>
+  </div>
+
+  <!-- MARDI HYROX -->
+  <div class="t-card hyrox" onclick="toggleT(this)">
+    <div class="t-hd">
+      <div class="t-ico">🏅</div>
+      <div style="flex:1"><div class="t-nm">Mardi 19h — Hyrox</div><div class="t-inf">Collectif · Cardio + Force · FIXE · <strong style="color:var(--white);">~75 min</strong></div></div>
+      <span class="chv">▼</span>
+    </div>
+    <div class="t-bd">
+      <p class="t-txt">Entraînement Hyrox collectif fixe à 19h. <strong style="color:var(--white);">Collation 1h30 avant :</strong> flocons d'avoine SG + beurre d'amande + skyr (glucides + protéines légers). Shaker Whey + Créatine dans l'heure qui suit.</p>
+      
+    </div>
+  </div>
+
+  <!-- MERCREDI PULL -->
+  <div class="t-card muscu" onclick="toggleT(this)">
+    <div class="t-hd">
+      <div class="t-ico">🔗</div>
+      <div style="flex:1"><div class="t-nm">Mercredi — Pull + Abdos</div><div class="t-inf">Dos · Biceps · Posture · Core · <strong style="color:var(--white);">~80 min</strong></div></div>
+      <span class="chv">▼</span>
+    </div>
+    <div class="t-bd">
+      <div style="font-size:10px;color:var(--muted);padding:8px 0 4px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">— Dos —</div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Tractions lestées ou élastiques</div><div class="ex-dt">Pronation large · amplitude complète · le roi des exercices dos</div></div><div class="ex-bd">4×5-7</div></div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Rowing barre penché</div><div class="ex-dt">Dos plat · coudes collés · omoplates en rétraction</div></div><div class="ex-bd">4×8-10</div></div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Tirage poitrine prise neutre</div><div class="ex-dt">Serrer omoplates en bas · buste légèrement incliné</div></div><div class="ex-bd">3×12</div></div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Face pull câble</div><div class="ex-dt">Posture · santé épaules · équilibre Push/Pull</div></div><div class="ex-bd">3×15</div><div class="ex-tag">Posture</div></div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Superman / Bird Dog</div><div class="ex-dt">Chaîne postérieure · bas du dos · équilibre postural</div></div><div class="ex-bd">3×12</div><div class="ex-tag">Posture</div></div>
+      <div style="font-size:10px;color:var(--muted);padding:10px 0 4px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">— Biceps —</div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Curl marteau haltères</div><div class="ex-dt">Brachial + biceps · supination en haut · force</div></div><div class="ex-bd">3×10-12</div></div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Curl incliné haltères</div><div class="ex-dt">Étirement biceps maximal · chef long</div></div><div class="ex-bd">3×10</div></div>
+      <div class="abs-section">
+        <div class="abs-title">Core & Abdos — 15 min</div>
+        <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Hollow body hold</div><div class="ex-dt">Gainage profond · transverse · bassin basculé</div></div><div class="ex-bd">3×30s</div></div>
+        <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Ab wheel rollout</div><div class="ex-dt">Genoux ou debout · dos plat obligatoire</div></div><div class="ex-bd">3×8-10</div></div>
+        <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Planche latérale avec rotation</div><div class="ex-dt">Obliques + stabilité lombaire</div></div><div class="ex-bd">3×10/c</div></div>
+      </div>
+      <div class="fin">⚡ Finition : Gainage planche 2×60s + Dead hang 3×30s (décompression vertébrale)</div>
+    </div>
+  </div>
+
+  <!-- JEUDI RUN -->
+  <div class="t-card run" onclick="toggleT(this)">
+    <div class="t-hd">
+      <div class="t-ico">🏃</div>
+      <div style="flex:1"><div class="t-nm">Jeudi — Course à pied Zone 2</div><div class="t-inf">Endurance fondamentale · VO2max · <strong style="color:var(--white);">45-60 min</strong></div></div>
+      <span class="chv">▼</span>
+    </div>
+    <div class="t-bd">
+      <p class="t-txt">Sortie endurance fondamentale. <strong style="color:var(--white);">FC cible : 130-150 bpm</strong> — rythme où tu peux tenir une conversation. C'est la base aérobie qui alimente le Hyrox et le semi. Ne pas aller plus vite, même si tu te sens bien.</p>
+      <div style="margin-top:12px;font-size:13px;color:var(--light);line-height:1.8;">
+        <strong style="color:var(--white);">Structure conseillée :</strong><br>
+        · 5 min échauffement marche rapide<br>
+        · 35-50 min Zone 2 régulier<br>
+        · 5-10 min retour au calme + marche
+      </div>
+      <div class="fin">🎯 Objectif semi : tenir 5'20-5'40/km en Zone 2</div>
+    </div>
+  </div>
+
+  <!-- VENDREDI LEGS -->
+  <div class="t-card legs" onclick="toggleT(this)">
+    <div class="t-hd">
+      <div class="t-ico">🦵</div>
+      <div style="flex:1"><div class="t-nm">Vendredi — Legs + Abdos</div><div class="t-inf">Squats · Ischios · Fessiers · Mollets · Core · <strong style="color:var(--white);">~85 min</strong></div></div>
+      <span class="chv">▼</span>
+    </div>
+    <div class="t-bd">
+      <div style="font-size:10px;color:var(--muted);padding:8px 0 4px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">— Quadriceps & Fessiers —</div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Squat barre haute</div><div class="ex-dt">Profondeur complète · 3s descente · roi des exercices</div></div><div class="ex-bd">4×6-8</div></div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Fentes marchées haltères</div><div class="ex-dt">Amplitude max · transfert direct Hyrox (lunges station)</div></div><div class="ex-bd">3×12/j</div><div class="ex-tag">Hyrox</div></div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Bulgarian split squat</div><div class="ex-dt">Équilibre unilatéral · fessier + quad</div></div><div class="ex-bd">3×10/j</div></div>
+      <div style="font-size:10px;color:var(--muted);padding:10px 0 4px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">— Ischios & Chaîne postérieure —</div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Romanian deadlift haltères</div><div class="ex-dt">Ischios · dos plat · étirement profond</div></div><div class="ex-bd">4×10</div></div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Leg curl couché machine</div><div class="ex-dt">Contrôle descente 3s · prévention blessure coureur</div></div><div class="ex-bd">3×12</div><div class="ex-tag">Santé</div></div>
+      <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Élévations mollets debout</div><div class="ex-dt">Amplitude complète · lent · prévention tendinite</div></div><div class="ex-bd">4×15</div><div class="ex-tag">Run</div></div>
+      <div class="abs-section">
+        <div class="abs-title">Core fonctionnel — 10 min</div>
+        <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Dead bug</div><div class="ex-dt">Stabilité lombaire · coordination · lombalgies prévention</div></div><div class="ex-bd">3×10/c</div></div>
+        <div class="ex-row"><div class="ex-dot"></div><div style="flex:1"><div class="ex-nm">Farmers walk avec haltères</div><div class="ex-dt">Core + posture + grip · station Hyrox farmers carry</div></div><div class="ex-bd">3×30m</div><div class="ex-tag">Hyrox</div></div>
+      </div>
+      <div class="fin">⚡ Finition : 15 min stepmill ou escalier — fessiers + cardio</div>
+    </div>
+  </div>
+
+  <!-- SAMEDI HYROX -->
+  <div class="t-card hyrox" onclick="toggleT(this)">
+    <div class="t-hd">
+      <div class="t-ico">🏅</div>
+      <div style="flex:1"><div class="t-nm">Samedi midi — Hyrox</div><div class="t-inf">Collectif · Fixe · <strong style="color:var(--white);">~75 min</strong></div></div>
+      <span class="chv">▼</span>
+    </div>
+    <div class="t-bd">
+      <p class="t-txt">Entraînement Hyrox collectif fixe le midi. Petit-déjeuner complet 2h avant. Post-séance : Whey + Créatine + repas complet dans l'heure.</p>
+    </div>
+  </div>
+
+  <!-- DIMANCHE VELO/RUN -->
+  <div class="t-card velo" onclick="toggleT(this)">
+    <div class="t-hd">
+      <div class="t-ico">🚴</div>
+      <div style="flex:1"><div class="t-nm">Dimanche — Vélo / Run plaisir</div><div class="t-inf">Zone 2 · Récupération active · Outdoor · <strong style="color:var(--white);">60-90 min</strong></div></div>
+      <span class="chv">▼</span>
+    </div>
+    <div class="t-bd">
+      <p class="t-txt">☀️ <strong style="color:var(--white);">Beau temps</strong> — Vélo 1h-1h30 ou course 45 min. Zone 2 plaisir. C'est aussi le jour du batch cooking l'après-midi.</p>
+      <p class="t-txt" style="margin-top:8px;">🌧️ <strong style="color:var(--white);">Pluie</strong> — Repos actif : 20-30 min tapis de course Z2 léger + étirements.</p>
+      <div class="fin">🍳 Dimanche = Batch cooking après la sortie</div>
+    </div>
+  </div>
+
+  <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:16px;margin-top:6px;">
+    <div style="font-size:10px;color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">✓ Séances cochées cette semaine</div>
+    <div id="seancesList"></div>
+    <div id="seanceCount" style="text-align:center;font-size:12px;color:var(--muted);margin-top:8px;font-weight:700;"></div>
+  </div>
+</section>
+
+<!-- ÉTIREMENTS -->
+<section class="sec" id="etirements">
+  <div class="stag">Soir · Avant le coucher · 15-20 min</div>
+  <h2 class="stitle">ÉTIREMENTS<br>DU SOIR</h2>
+  <p style="font-size:13px;color:var(--light);margin-bottom:20px;line-height:1.7;">Ces étirements sont conçus pour toi : sportif endurant + musculation + station assise au boulot. Objectif : rester grand, droit, souple, et prévenir les blessures. À faire chaque soir, même 10 min suffisent.</p>
+
+  <!-- Psoas -->
+  <div class="stretch-card" onclick="toggleStr(this)">
+    <div class="str-hd">
+      <div class="str-ico">🦵</div>
+      <div style="flex:1"><div class="str-nm">Psoas & Fléchisseurs de hanche</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">🔍 "Low lunge hip flexor stretch"</div></div>
+      <div class="str-dur">2×60s/c</div>
+      <span class="chv" style="margin-left:8px;">▼</span>
+    </div>
+    <div class="str-bd">
+      <a href="https://www.youtube.com/results?search_query=psoas+hip+flexor+stretch+low+lunge" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,0,0,0.12);border:1px solid rgba(255,0,0,0.25);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:#FF6060;text-decoration:none;margin:8px 0;">▶ Voir sur YouTube</a>
+      <div class="str-how">Position fente basse : genou arrière au sol, pied avant à 90°. Pousse les hanches vers l'avant et le bas. Bras levés au ciel pour allonger. Sens l'étirement dans le devant de la cuisse arrière et le bas du ventre.</div>
+      <div class="str-tip">Critique si tu cours et restes assis au boulot. Un psoas court = bascule du bassin = mal de dos + performance réduite.</div>
+    </div>
+  </div>
+
+  <!-- Ischios -->
+  <div class="stretch-card" onclick="toggleStr(this)">
+    <div class="str-hd">
+      <div class="str-ico">🏃</div>
+      <div style="flex:1"><div class="str-nm">Ischios-jambiers</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">🔍 "Seated hamstring stretch floor"</div></div>
+      <div class="str-dur">2×60s/c</div>
+      <span class="chv" style="margin-left:8px;">▼</span>
+    </div>
+    <div class="str-bd">
+      <a href="https://www.youtube.com/results?search_query=seated+hamstring+stretch+floor+straight+leg" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,0,0,0.12);border:1px solid rgba(255,0,0,0.25);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:#FF6060;text-decoration:none;margin:8px 0;">▶ Voir sur YouTube</a>
+      <div class="str-how">Assis au sol, jambe tendue devant toi, l'autre fléchie. Penche-toi vers l'avant depuis les hanches (pas le dos), mains vers le pied. Garde le dos plat — c'est la clé. Alternative : debout, pied sur une chaise, buste vers l'avant.</div>
+      <div class="str-tip">Les ischios courts tirent sur le bassin et créent des lombalgies. Indispensable pour le coureur et le souleveur de fonte.</div>
+    </div>
+  </div>
+
+  <!-- Piriforme -->
+  <div class="stretch-card" onclick="toggleStr(this)">
+    <div class="str-hd">
+      <div class="str-ico">🍑</div>
+      <div style="flex:1"><div class="str-nm">Piriforme & Fessiers — Figure 4</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">🔍 "Figure 4 piriformis stretch lying"</div></div>
+      <div class="str-dur">2×60s/c</div>
+      <span class="chv" style="margin-left:8px;">▼</span>
+    </div>
+    <div class="str-bd">
+      <a href="https://www.youtube.com/results?search_query=figure+4+piriformis+stretch+lying+down" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,0,0,0.12);border:1px solid rgba(255,0,0,0.25);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:#FF6060;text-decoration:none;margin:8px 0;">▶ Voir sur YouTube</a>
+      <div class="str-how">Allongé sur le dos, cheville droite posée sur genou gauche en forme de "4". Attrape la cuisse gauche à deux mains et tire vers toi. Sens le fessier et la hanche externe s'ouvrir. Respire profondément.</div>
+      <div class="str-tip">Prévient le syndrome de l'essuie-glace et les douleurs de hanche chez le coureur et le cycliste.</div>
+    </div>
+  </div>
+
+  <!-- Thoracique -->
+  <div class="stretch-card" onclick="toggleStr(this)">
+    <div class="str-hd">
+      <div class="str-ico">🫁</div>
+      <div style="flex:1"><div class="str-nm">Ouverture thoracique & Poitrine</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">🔍 "Thoracic spine extension foam roller"</div></div>
+      <div class="str-dur">2×45s</div>
+      <span class="chv" style="margin-left:8px;">▼</span>
+    </div>
+    <div class="str-bd">
+      <a href="https://www.youtube.com/results?search_query=thoracic+spine+extension+foam+roller+chest+opener" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,0,0,0.12);border:1px solid rgba(255,0,0,0.25);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:#FF6060;text-decoration:none;margin:8px 0;">▶ Voir sur YouTube</a>
+      <div class="str-how">Place un foam roller ou oreiller roulé dans le milieu du dos (zone thoracique). Bras derrière la tête. Laisse la gravité ouvrir la cage thoracique. Alternative : debout dans l'encadrement d'une porte, bras à 90°, penche-toi en avant.</div>
+      <div class="str-tip">La musculation + boulot assis ferment la poitrine et arrondissent le dos. C'est ce qui te tasse. 5 min ici = meilleure posture visible immédiatement.</div>
+    </div>
+  </div>
+
+  <!-- Épaules -->
+  <div class="stretch-card" onclick="toggleStr(this)">
+    <div class="str-hd">
+      <div class="str-ico">💪</div>
+      <div style="flex:1"><div class="str-nm">Épaules, Trapèzes & Nuque</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">🔍 "Shoulder cross body stretch + trap stretch"</div></div>
+      <div class="str-dur">2×40s/c</div>
+      <span class="chv" style="margin-left:8px;">▼</span>
+    </div>
+    <div class="str-bd">
+      <a href="https://www.youtube.com/results?search_query=shoulder+cross+body+stretch+trapezius+neck+stretch" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,0,0,0.12);border:1px solid rgba(255,0,0,0.25);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:#FF6060;text-decoration:none;margin:8px 0;">▶ Voir sur YouTube</a>
+      <div class="str-how">1) Bras tendu passé devant l'autre, pression du coude vers toi (deltoïde). 2) Nuque : oreille vers épaule, main posée légèrement sur la tête — jamais forcer. 3) Bras derrière le dos, mains jointes, ouvre la poitrine.</div>
+      <div class="str-tip">Trapèzes et épaules ultra-sollicités en Hyrox (sled push, sandbag, wall balls). Les étirer systématiquement = prévention blessure directe.</div>
+    </div>
+  </div>
+
+  <!-- Quadriceps -->
+  <div class="stretch-card" onclick="toggleStr(this)">
+    <div class="str-hd">
+      <div class="str-ico">🦿</div>
+      <div style="flex:1"><div class="str-nm">Quadriceps</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">🔍 "Standing quad stretch + kneeling quad stretch"</div></div>
+      <div class="str-dur">2×45s/c</div>
+      <span class="chv" style="margin-left:8px;">▼</span>
+    </div>
+    <div class="str-bd">
+      <a href="https://www.youtube.com/results?search_query=standing+quad+stretch+kneeling+advanced" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,0,0,0.12);border:1px solid rgba(255,0,0,0.25);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:#FF6060;text-decoration:none;margin:8px 0;">▶ Voir sur YouTube</a>
+      <div class="str-how">Debout sur une jambe, attrape le pied arrière vers les fessiers, genoux serrés. Version avancée : fente basse, genou arrière au sol, recule le pied et incline le buste en arrière — quad + psoas en même temps.</div>
+      <div class="str-tip">Quads massivement sollicités en Hyrox et en descente running. Les ignorer = tendinite rotulienne à terme.</div>
+    </div>
+  </div>
+
+  <!-- Mollets -->
+  <div class="stretch-card" onclick="toggleStr(this)">
+    <div class="str-hd">
+      <div class="str-ico">🦶</div>
+      <div style="flex:1"><div class="str-nm">Mollets & Tendon d'Achille</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">🔍 "Calf stretch wall gastrocnemius soleus"</div></div>
+      <div class="str-dur">2×60s/c</div>
+      <span class="chv" style="margin-left:8px;">▼</span>
+    </div>
+    <div class="str-bd">
+      <a href="https://www.youtube.com/results?search_query=calf+stretch+wall+gastrocnemius+soleus+achilles" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,0,0,0.12);border:1px solid rgba(255,0,0,0.25);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:#FF6060;text-decoration:none;margin:8px 0;">▶ Voir sur YouTube</a>
+      <div class="str-how">Contre un mur : 1) Pied arrière à plat, jambe tendue → gastrocnémien (haut du mollet). 2) Même position, genou légèrement fléchi → soléaire + tendon d'Achille. Les deux sont différents, faire les deux.</div>
+      <div class="str-tip">Blessure n°1 du coureur. 2 min par soir prévient 90% des problèmes d'Achille. Ne jamais négliger.</div>
+    </div>
+  </div>
+
+  <!-- Cat-Cow -->
+  <div class="stretch-card" onclick="toggleStr(this)">
+    <div class="str-hd">
+      <div class="str-ico">🐱</div>
+      <div style="flex:1"><div class="str-nm">Mobilité colonne — Cat & Cow</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">🔍 "Cat cow yoga spine mobility"</div></div>
+      <div class="str-dur">2×10 reps</div>
+      <span class="chv" style="margin-left:8px;">▼</span>
+    </div>
+    <div class="str-bd">
+      <a href="https://www.youtube.com/results?search_query=cat+cow+yoga+spine+mobility+tutorial" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,0,0,0.12);border:1px solid rgba(255,0,0,0.25);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:#FF6060;text-decoration:none;margin:8px 0;">▶ Voir sur YouTube</a>
+      <div class="str-how">À quatre pattes : Inspiration → creuse le dos, bassin en avant, regarde devant (Cow). Expiration → arrondi le dos, bassin vers l'arrière, menton vers la poitrine (Cat). Lent, vertèbre par vertèbre. Termine par Child's pose 60s.</div>
+      <div class="str-tip">Décompresse les disques vertébraux après une journée assise + sport. Rester grand passe par là chaque soir.</div>
+    </div>
+  </div>
+
+  <!-- IT band -->
+  <div class="stretch-card" onclick="toggleStr(this)">
+    <div class="str-hd">
+      <div class="str-ico">🎯</div>
+      <div style="flex:1"><div class="str-nm">Bandelette ilio-tibiale — IT band</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">🔍 "IT band stretch standing iliotibial"</div></div>
+      <div class="str-dur">2×60s/c</div>
+      <span class="chv" style="margin-left:8px;">▼</span>
+    </div>
+    <div class="str-bd">
+      <a href="https://www.youtube.com/results?search_query=IT+band+iliotibial+stretch+standing+runner" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,0,0,0.12);border:1px solid rgba(255,0,0,0.25);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:#FF6060;text-decoration:none;margin:8px 0;">▶ Voir sur YouTube</a>
+      <div class="str-how">Debout, jambe à étirer passée derrière l'autre. Incline le buste du côté opposé en levant le bras — tu sens l'étirement sur le flanc et la hanche externe. Ou allongé : genou plié passé de l'autre côté, épaule au sol.</div>
+      <div class="str-tip">Syndrome de l'essuie-glace = blessure la plus fréquente des semi-marathoniens. Cet étirement + foam roller sur la cuisse externe = prévention directe.</div>
+    </div>
+  </div>
+
+  <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.20);border-radius:12px;padding:14px 16px;margin-top:8px;">
+    <div style="font-size:11px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">💡 Protocole optimal</div>
+    <div style="font-size:13px;color:var(--light);line-height:1.75;">
+      1. Jamais d'étirements statiques <strong style="color:var(--white);">avant</strong> une séance intense<br>
+      2. Foam roller 5 min <strong style="color:var(--white);">avant</strong> les étirements (libère les fascias)<br>
+      3. Maintenir chaque position <strong style="color:var(--white);">minimum 45-60s</strong> pour un effet réel<br>
+      4. Respiration profonde — expire pour aller plus loin<br>
+      5. Dead hang en salle après chaque séance dos/push
+    </div>
+  </div>
+</section>
+
+<!-- NUTRITION -->
+<section class="sec" id="nutrition">
+  <div class="stag">2 450 kcal · 200g protéines · Sans gluten</div>
+  <h2 class="stitle">PLAN<br>NUTRITIONNEL</h2>
+  <p style="font-size:12px;color:var(--muted);margin-bottom:8px;font-style:italic;">Lundi → Vendredi · Weekend libre · Chaque choix alimentaire a une raison scientifique</p>
+  <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.22);border-radius:12px;padding:12px 14px;margin-bottom:18px;">
+    <div style="font-size:11px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">🍽️ Si encore faim — options libres</div>
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--light);">🥑 Toast avocat sur pain sans gluten</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--light);">🥛 Bol fromage blanc + whey + oléagineux</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--light);">🍓 Skyr + fruits rouges + amandes</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--light);">🥚 2-3 œufs durs</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--light);">🍌 Banane + beurre d'amande</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--light);">🥜 Noix de cajou ou amandes (25g max)</div>
+    </div>
+  </div>
+  <div id="foodDays"></div>
+</section>
+
+<!-- BATCH COOKING -->
+<section class="sec" id="batch">
+  <div class="stag">Dimanche · ~2 heures · Prépare tout</div>
+  <h2 class="stitle">BATCH<br>COOKING</h2>
+  <p style="font-size:13px;color:var(--light);margin-bottom:18px;">Coche ce que tu as préparé ✓</p>
+  <div id="batchList"></div>
+  <div class="subh" style="margin-top:24px;">Ordre de préparation</div>
+  <div id="batchOrder"></div>
+</section>
+
+<!-- COMPLÉMENTS -->
+<section class="sec" id="suppl">
+  <div class="stag">Science-based · Testostérone · Peau · Performance</div>
+  <h2 class="stitle">COMPLÉMENTS<br>ALIMENTAIRES</h2>
+  <p style="font-size:13px;color:var(--light);margin-bottom:20px;">Coche chaque prise au fil de la journée ✓</p>
+
+  <!-- MATIN -->
+  <div style="background:rgba(255,200,80,0.06);border:1px solid rgba(255,200,80,0.22);border-radius:14px;padding:16px;margin-bottom:12px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+      <span style="font-size:18px;">☀️</span>
+      <span style="font-size:11px;font-weight:800;color:#FFD060;text-transform:uppercase;letter-spacing:0.12em;">Matin · Avec le petit-déjeuner</span>
+    </div>
+    <div class="s-row"><div class="s-chk" onclick="chk(this)"></div><div><div class="s-nm">Collagène Marin + Vit C</div><div class="s-time">10g + 200mg Vit C · idéalement 30 min avant le repas</div><div class="s-why">Peau · tendons · articulations · actif dès 8 semaines · Eiyolab</div></div></div>
+    <div class="s-row"><div class="s-chk" onclick="chk(this)"></div><div><div class="s-nm">Vitamine D3 + K2</div><div class="s-time">4 000 UI D3 + 100µg K2 · avec matières grasses pour absorption</div><div class="s-why">+25% testostérone si déficient · immunité · os · Nutri&Co D3K2</div></div></div>
+  </div>
+
+  <!-- MIDI -->
+  <div style="background:rgba(80,220,120,0.05);border:1px solid rgba(80,220,120,0.18);border-radius:14px;padding:16px;margin-bottom:12px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+      <span style="font-size:18px;">🍽️</span>
+      <span style="font-size:11px;font-weight:800;color:#50DC78;text-transform:uppercase;letter-spacing:0.12em;">Midi · Avec le déjeuner</span>
+    </div>
+    <div class="s-row"><div class="s-chk" onclick="chk(this)"></div><div><div class="s-nm">Oméga-3 EPA/DHA</div><div class="s-time">1-1,5g EPA+DHA · avec matières grasses du repas</div><div class="s-why">Anti-inflammatoire · peau · articulations · testostérone · Nutri&Co / Solgar</div></div></div>
+    <div class="s-row"><div class="s-chk" onclick="chk(this)"></div><div><div class="s-nm">Bêta-Alanine — dose 1</div><div class="s-time">1,6g · avec le repas (fourmillements normaux et passagers)</div><div class="s-why">Tampon acide lactique · endurance Hyrox · Eiyolab / MyProtein SG</div></div></div>
+  </div>
+
+  <!-- POST-SÉANCE -->
+  <div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.22);border-radius:14px;padding:16px;margin-bottom:12px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+      <span style="font-size:18px;">🏋️</span>
+      <span style="font-size:11px;font-weight:800;color:var(--gold-light);text-transform:uppercase;letter-spacing:0.12em;">Post-séance · Dans les 30 min</span>
+    </div>
+    <div class="s-row"><div class="s-chk" onclick="chk(this)"></div><div><div class="s-nm">Whey Isolat Eiyolab</div><div class="s-time">25-30g · shaker eau froide 300ml</div><div class="s-why">Fenêtre anabolique · synthèse protéique maximale</div></div></div>
+    <div class="s-row"><div class="s-chk" onclick="chk(this)"></div><div><div class="s-nm">Créatine Monohydrate</div><div class="s-time">5g · avec la Whey · jours sans sport : avec le petit-déj</div><div class="s-why">+8-12% force · récupération ATP · saturation cumulative · Eiyolab</div></div></div>
+  </div>
+
+  <!-- DÎNER -->
+  <div style="background:rgba(80,160,255,0.05);border:1px solid rgba(80,160,255,0.18);border-radius:14px;padding:16px;margin-bottom:12px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+      <span style="font-size:18px;">🌆</span>
+      <span style="font-size:11px;font-weight:800;color:#80C0FF;text-transform:uppercase;letter-spacing:0.12em;">Dîner · Avec le repas du soir</span>
+    </div>
+    <div class="s-row"><div class="s-chk" onclick="chk(this)"></div><div><div class="s-nm">Oméga-3 EPA/DHA — dose 2</div><div class="s-time">1-1,5g EPA+DHA · avec le dîner</div><div class="s-why">Absorbés pendant le sommeil · anti-inflammatoire nocturne · peau</div></div></div>
+    <div class="s-row"><div class="s-chk" onclick="chk(this)"></div><div><div class="s-nm">Bêta-Alanine — dose 2</div><div class="s-time">1,6g · avec le repas</div><div class="s-why">2ème dose pour atteindre 3,2g/j · endurance Hyrox</div></div></div>
+  </div>
+
+  <!-- SOIR / COUCHER -->
+  <div style="background:rgba(200,80,255,0.05);border:1px solid rgba(200,80,255,0.18);border-radius:14px;padding:16px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+      <span style="font-size:18px;">🌙</span>
+      <span style="font-size:11px;font-weight:800;color:#D080FF;text-transform:uppercase;letter-spacing:0.12em;">Soir · 30 min avant coucher</span>
+    </div>
+    <div class="s-row"><div class="s-chk" onclick="chk(this)"></div><div><div class="s-nm">Magnésium Bisglycinate</div><div class="s-time">300-400mg · favorise l'endormissement</div><div class="s-why">Sommeil profond · -cortisol · récupération musculaire · Nutri&Co</div></div></div>
+    <div class="s-row"><div class="s-chk" onclick="chk(this)"></div><div><div class="s-nm">Zinc Bisglycinate</div><div class="s-time">15mg · loin des repas riches en fibres</div><div class="s-why">Testostérone · peau · immunité · cicatrisation · Nutri&Co / Solgar</div></div></div>
+    <div class="s-row"><div class="s-chk" onclick="chk(this)"></div><div><div class="s-nm">Ashwagandha KSM-66</div><div class="s-time">600mg · avec le magnésium et le zinc</div><div class="s-why">-27% cortisol étudié · +testostérone · récupération · Nutri&Co</div></div></div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="sec" id="courses">
+  <div class="stag">Semaine type · Lundi → Vendredi · SG</div>
+  <h2 class="stitle">LISTE DE<br>COURSES</h2>
+  <div style="display:flex;gap:8px;margin-bottom:18px;">
+    <button onclick="resetCourses()" style="flex:1;padding:11px;background:rgba(255,255,255,0.06);color:var(--light);border:1px solid rgba(255,255,255,0.12);border-radius:10px;font-size:12px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;">↺ Reset</button>
+    <button onclick="checkAllCourses()" style="flex:1;padding:11px;background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid rgba(201,168,76,0.28);border-radius:10px;font-size:12px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;">✓ Tout cocher</button>
+  </div>
+  <div id="coursesList"></div>
+</section>
+
+<!-- TRACKER -->
+<section class="sec" id="tracker">
+  <div class="stag">Dimanche matin · À jeun</div>
+  <h2 class="stitle">POIDS &<br>MESURES</h2>
+  <div class="w-block">
+    <div class="w-lbl">⚖️ Poids du dimanche</div>
+    <div class="w-disp" id="wDisp">—<span> kg</span></div>
+    <div class="w-ctrls">
+      <button class="w-btn m" onclick="cw(-0.1)">−0.1</button>
+      <button class="w-btn m" onclick="cw(-1)">−1</button>
+      <button class="w-btn p" onclick="cw(1)">+1</button>
+      <button class="w-btn p" onclick="cw(0.1)">+0.1</button>
+    </div>
+  </div>
+  <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.18);border-radius:13px;padding:16px;margin-bottom:13px;">
+    <div style="font-size:10px;color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">📏 Mensurations</div>
+    <div id="mesInputs"></div>
+  </div>
+  <button class="save-btn" onclick="saveTout()">📌 Enregistrer poids & mesures</button>
+  <div id="wHist"></div>
+  <div id="mesHist"></div>
+</section>
+
+<!-- ESSENTIELS -->
+<section class="sec" id="essentiels">
+  <div class="stag">Santé · Testostérone · Peau · Hyrox</div>
+  <h2 class="stitle">MES<br>ESSENTIELS</h2>
+
+  <div class="ess-card testo">
+    <div class="ess-title">🥩 Aliments testostérone & masse sèche</div>
+    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Steak haché 5% MG</strong> — Zinc + fer héminique + créatine naturelle. 2-3x/semaine. Midi de préférence pour absorption maximale.</div></div>
+    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Œufs entiers (3-4/jour)</strong> — Cholestérol précurseur de testostérone + Vit D + choline. Ne jamais jeter les jaunes.</div></div>
+    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Saumon sauvage 2x/sem</strong> — Oméga-3 EPA/DHA + Vit D. Absorbés pendant le sommeil. Anti-inflammatoire musculaire.</div></div>
+    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Avocat quotidien</strong> — Acides gras monoinsaturés essentiels à la synthèse hormonale. ½ avocat suffit.</div></div>
+    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Amandes + Noix de cajou</strong> — Zinc + magnésium + selenium. Poignée (25g) en collation quotidienne.</div></div>
+  </div>
+
+  <div class="ess-card peau">
+    <div class="ess-title">✨ Peau · Collagène · Anti-âge</div>
+    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Collagène marin + Vit C</strong> — Actif dès 8 semaines. Peau, tendons, cartilages. À jeun le matin = absorption maximale.</div></div>
+    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Fruits rouges quotidiens</strong> — Antioxydants N°1. Anti-inflammation post-effort. Protègent l'ADN. 80-100g/jour.</div></div>
+    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Curcuma + poivre noir</strong> — La pipérine du poivre augmente l'absorption de curcumine de 2000%. Dans tous les plats.</div></div>
+    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Hydratation 2,5L/jour</strong> — +500ml par heure de sport intense. L'hydratation est le facteur n°1 de la qualité de peau.</div></div>
+  </div>
+
+  <div class="ess-card recup">
+    <div class="ess-title">🧠 Récupération · Sommeil · GH</div>
+    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Coucher avant 23h30</strong> — La GH (brûle graisses + répare muscles) est sécrétée entre minuit et 3h en sommeil profond. C'est irrecouvrable.</div></div>
+    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>7-8h de sommeil</strong> — La testostérone se reconstitue pendant le sommeil. -1h de sommeil = -15% de testostérone le lendemain.</div></div>
+    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Magnésium + Ashwagandha le soir</strong> — Synergie prouvée : -27% cortisol, meilleure qualité de sommeil, récupération musculaire accélérée.</div></div>
+    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Foam roller post-séance</strong> — 10 min sur quads, ischios, IT band, mollets. Réduit courbatures de 40% et prévient les blessures du coureur.</div></div>
+  </div>
+
+  <div class="ess-card perf">
+    <div class="ess-title">🏅 Hyrox & Semi — Clés performance</div>
+    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Zone 2 régulière</strong> — 2x/semaine minimum (jeudi + dimanche). La base aérobie détermine 70% de la performance Hyrox.</div></div>
+    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Créatine tous les jours</strong> — La saturation est cumulative. Même les jours sans sport. 5g le matin, toujours.</div></div>
+    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Glucides pré-effort</strong> — Patate douce ou riz 1h30 avant chaque Hyrox. Glycogène = carburant de l'effort intense.</div></div>
+    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Électrolytes pendant</strong> — Sodium + potassium sur toute sortie >60 min. Prévient crampes et baisses brutales d'énergie.</div></div>
+    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Sans gluten</strong> — Réduit inflammation intestinale + améliore absorption nutriments + moins de fatigue chronique.</div></div>
+  </div>
+
+  <div class="subh">Règles d'or</div>
+  <div class="r-row"><div class="r-ico">💧</div><div><div class="r-nm">2,5L d'eau/jour</div><div class="r-desc">+500ml/heure de sport. Métabolisme +24% avec 500ml dès le réveil.</div></div></div>
+  <div class="r-row"><div class="r-ico">🥩</div><div><div class="r-nm">200g protéines · 5 repas</div><div class="r-desc">Max 40g absorbé par prise. Répartir sur la journée = masse musculaire maximale.</div></div></div>
+  <div class="r-row"><div class="r-ico">⚡</div><div><div class="r-nm">Créatine tous les jours</div><div class="r-desc">5g le matin même sans séance. Saturation musculaire = bénéfice constant.</div></div></div>
+  <div class="r-row"><div class="r-ico">😴</div><div><div class="r-nm">Coucher avant 23h30</div><div class="r-desc">GH + testostérone synthétisées pendant le sommeil. Pas de compromis.</div></div></div>
+  <div class="r-row"><div class="r-ico">🧘</div><div><div class="r-nm">Étirements chaque soir</div><div class="r-desc">15 min minimum. Rester grand, droit, souple. Prévenir les blessures long terme.</div></div></div>
+  <div class="r-row"><div class="r-ico">🌿</div><div><div class="r-nm">Foam roller post-séance</div><div class="r-desc">Quads, ischios, IT band, mollets. Réduit courbatures -40%.</div></div></div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-title">EXCELLENCE QUOTIDIENNE 🏅</div>
+  <div class="footer-sub">Chaque séance, chaque repas, chaque nuit de sommeil<br>te rapproche de ta meilleure version.</div>
+  <div class="legal">
+    <div style="font-size:12px;color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">© 2026 — Yanis Bensaadi</div>
+    <div style="font-size:11px;color:var(--light);line-height:1.8;margin-bottom:10px;">Ce programme (plan d'entraînement, nutrition, compléments, batch cooking, suivi) a été entièrement créé et conçu par <strong style="color:var(--white);">Yanis Bensaadi</strong>.</div>
+    <div style="font-size:11px;color:var(--muted);line-height:1.75;">
+      Toute reproduction, copie partielle ou totale, distribution, adaptation ou utilisation commerciale de ce contenu, sous quelque forme que ce soit, sans autorisation écrite préalable de l'auteur est <strong style="color:var(--light);">strictement interdite</strong>.<br><br>
+      Ce programme est destiné à un usage strictement personnel et non commercial. Il ne constitue pas un avis médical ou diététique professionnel. Consultez un professionnel de santé avant de modifier votre alimentation ou programme sportif.<br><br>
+      Contenu protégé — Tous droits réservés.
+    </div>
+    <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06);font-size:11px;color:var(--muted);">
+      📩 Contact & demande d'autorisation : <span style="color:var(--gold);">yanisb&#46;lu&#64;gmail&#46;com</span>
+    </div>
+  </div>
+  </div>
+</div>
+
+<script>
+// FOOD DATA — Lundi → Vendredi
+const fd = [
+  {day:'Lundi',kcal:1891,prot:156,gluc:226,meals:[
+    {l:'Petit-déjeuner',n:'Porridge express',i:'60g flocons avoine SG · 1 banane · 1cs beurre d\'amande · chia · + D3K2',w:'Glucides complexes le matin = énergie soutenue · créatine avec repas glucidique = absorption optimale'},
+    {l:'Déjeuner · boulot',n:'Bowl steak haché riz haricots',i:'150g steak haché 5% · 120g riz basmati SG · haricots verts · tamari SG',w:'Fer héminique + zinc + créatine naturelle · mieux absorbés en journée active'},
+    {l:'Collation 16h',n:'Skyr & amandes',i:'200g skyr nature · 25g amandes · emporter en pot hermétique',w:'Caséine lente entre les repas + zinc/magnésium des amandes'},
+    {l:'Dîner pré-séance',n:'Saumon patate douce brocoli',i:'160g saumon · 180g patate douce · brocoli · citron · huile d\'olive · + oméga-3',w:'Oméga-3 absorbés pendant le sommeil · anti-inflammatoire · peau sèche'},
+    {l:'Post-séance',n:'Shaker Whey isolat',i:'25-30g whey isolat + 5g créatine · eau froide 300ml',w:'Fenêtre anabolique : synthèse protéique max dans les 30 min post-effort'}
+  ]},
+  {day:'Mardi — Hyrox 19h',kcal:1798,prot:164,gluc:191,meals:[
+    {l:'Petit-déjeuner',n:'Œufs brouillés & avocat',i:'3 œufs brouillés · ½ avocat · tomate',w:'Protéines + graisses saines le matin · cholestérol des œufs = précurseur testostérone'},
+    {l:'Déjeuner · boulot',n:'Bowl poulet riz épinards',i:'160g poulet effiloché · 120g riz SG · épinards · huile d\'olive · herbes',w:'Protéine maigre + glucides = énergie disponible pour le Hyrox du soir'},
+    {l:'Collation 16h · pré-Hyrox',n:'Galette de riz SG + beurre d\'amande + skyr',i:'2 galettes de riz SG · 1cs beurre d\'amande · 150g skyr · 1h30 avant Hyrox',w:'Glucides rapides + protéines légères = énergie sans lourdeur digestive'},
+    {l:'Dîner post-Hyrox',n:'Steak haché patate douce poivrons',i:'180g steak haché · 160g patate douce · poivrons · moutarde SG + oméga-3',w:'Zinc + fer post-effort = récupération musculaire + reconstitution testostérone nocturne'},
+    {l:'Post-Hyrox',n:'Shaker Whey isolat',i:'25-30g whey · eau 300ml · dans l\'heure après',w:''}
+  ]},
+  {day:'Mercredi',kcal:1744,prot:164,gluc:197,meals:[
+    {l:'Petit-déjeuner',n:'Porridge chia banane',i:'60g flocons SG · 1 banane · chia · cannelle · eau chaude',w:'Rapide · 5 min · fibres + glucides complexes'},
+    {l:'Déjeuner · boulot',n:'Bowl steak haché lentilles brocoli',i:'150g steak haché · 150g lentilles · brocoli · moutarde SG',w:'Combo fer héminique + non héminique avec Vit C du brocoli = absorption maximale du fer'},
+    {l:'Collation 16h',n:'Skyr & fruits rouges',i:'200g skyr · 80g fruits rouges décongelés · emporter en pot',w:'Antioxydants post-effort · réduisent stress oxydatif · bonne peau'},
+    {l:'Dîner pré-séance',n:'Poulet riz haricots verts',i:'180g poulet effiloché · 140g riz · haricots verts · huile d\'olive + oméga-3',w:'Digestion rapide · énergie disponible · pas lourd avant séance Pull'},
+    {l:'Post-séance',n:'Shaker Whey isolat',i:'25-30g whey + 5g créatine · eau 300ml',w:''}
+  ]},
+  {day:'Jeudi — Course à pied',kcal:1956,prot:174,gluc:234,meals:[
+    {l:'Petit-déjeuner',n:'Porridge protéiné',i:'60g flocons SG · 20g whey vanille · 1 banane · beurre d\'amande · lait végétal SG',w:'Glucides élevés le matin de course = glycogène disponible pour la sortie'},
+    {l:'Déjeuner · boulot',n:'Bowl poulet patate douce wok',i:'160g poulet effiloché · 160g patate douce · mélange wok SG · tamari SG',w:'Glucides complexes + protéine maigre = énergie soutenue toute l\'après-midi'},
+    {l:'Collation 16h',n:'Fromage blanc & amandes',i:'150g fromage blanc 0% · 25g amandes · emporter en pot',w:'Caséine lente entre les repas · zinc + magnésium des amandes'},
+    {l:'Dîner post-run',n:'Saumon riz brocoli épinards + oméga-3',i:'160g saumon · 150g riz SG · brocoli + épinards · citron · huile d\'olive',w:'2ème dose oméga-3 de la semaine · récupération musculaire · peau + articulations'},
+    {l:'Post-run',n:'Shaker Whey isolat',i:'25-30g whey + 5g créatine · eau 300ml',w:''}
+  ]},
+  {day:'Vendredi — Legs',kcal:1980,prot:168,gluc:238,meals:[
+    {l:'Petit-déjeuner',n:'Œufs & avocat',i:'3 œufs brouillés · ½ avocat · ½ banane · tomates cerises',w:'Graisses + protéines le matin de legs = testostérone + récupération'},
+    {l:'Déjeuner · boulot',n:'Bowl poulet riz épinards',i:'180g poulet effiloché · 140g riz SG · épinards · huile d\'olive · citron',w:'Charge glucidique élevée avant séance Legs intense du soir'},
+    {l:'Collation 16h',n:'Banane + beurre d\'amande + skyr',i:'1 banane · 1cs beurre d\'amande · 150g skyr · 1h30 avant séance',w:'Glucides rapides + protéines = énergie séance Legs'},
+    {l:'Dîner post-Legs',n:'Bœuf haché riz lentilles + oméga-3',i:'150g bœuf haché · 120g riz SG · 100g lentilles · curcuma + poivre · huile d\'olive',w:'Charge protéique maximale après séance Legs lourde · zinc + fer = testostérone nocturne'},
+    {l:'Post-séance',n:'Shaker Whey isolat',i:'25-30g whey + 5g créatine · eau 300ml',w:''}
+  ]}
+];
+
+document.getElementById('foodDays').innerHTML = fd.map(d=>`
+  <div class="f-card">
+    <div class="f-hd" onclick="this.parentElement.classList.toggle('open')">
+      <div>
+        <div class="f-title">${d.day}</div>
+        <div class="f-mac">
+          <span class="mc">Prot <span>${d.prot}g</span></span>
+          <span class="mc">Gluc <span>${d.gluc}g</span></span>
+          <span class="mc">${d.kcal} kcal</span>
+        </div>
+      </div>
+      <span style="color:var(--gold);font-size:16px;margin-top:4px;">▼</span>
+    </div>
+    <div class="f-bd">
+      ${d.meals.map(m=>`
+        <div class="meal">
+          <div class="mlbl">${m.l}</div>
+          <div class="mnm">${m.n}</div>
+          <div class="ming">${m.i}</div>
+          ${m.w?`<div class="mwhy">→ ${m.w}</div>`:''}
+        </div>`).join('')}
+    </div>
+  </div>`).join('');
+
+// BATCH
+const batchItems = [
+  {qty:'1 kg',nm:'Blanc de poulet',method:'Four 200° · 25 min · effilocher',cons:'Frigo 4j / Congélo 3 mois'},
+  {qty:'400 g',nm:'Saumon (2 pavés)',method:'Poêle · 4 min/côté',cons:'Frigo 2-3j · congeler dès J0'},
+  {qty:'600 g',nm:'Steak haché 5% MG',method:'Poêle · 3 min/côté · émietter',cons:'Frigo 3-4j / Congélo 3 mois'},
+  {qty:'600 g',nm:'Riz basmati SG',method:'Eau bouillante · 12 min',cons:'Frigo 4j / Congélo 2 mois'},
+  {qty:'400 g',nm:'Patate douce',method:'Four en dés 200° · 25 min',cons:'Frigo 5j'},
+  {qty:'600 g',nm:'Brocoli surgelé',method:'Eau bouillante · 5 min',cons:'Frigo 4-5j'},
+  {qty:'500 g',nm:'Haricots verts surgelés',method:'Eau bouillante · 7 min',cons:'Frigo 4-5j'},
+  {qty:'400 g',nm:'Épinards surgelés',method:'Poêle directement · 4 min',cons:'Frigo 4j'},
+  {qty:'8',nm:'Œufs durs',method:'Eau bouillante · 10 min · écaler',cons:'Frigo 5j max'},
+  {qty:'300 g',nm:'Lentilles corail',method:'Eau bouillante · 15 min',cons:'Frigo 4j'},
+];
+const batchOrder = [
+  {time:'0:00',action:'Four à 200° — enfourner poulet + patate douce en dés'},
+  {time:'0:05',action:'Lancer riz basmati eau bouillante (12 min)'},
+  {time:'0:17',action:'Égoutter riz · lancer brocoli (5 min)'},
+  {time:'0:22',action:'Égoutter brocoli · lancer haricots verts (7 min)'},
+  {time:'0:25',action:'Sortir poulet + patate du four · effilocher le poulet'},
+  {time:'0:29',action:'Égoutter haricots · poêler épinards (4 min)'},
+  {time:'0:33',action:'Lancer lentilles corail (15 min)'},
+  {time:'0:35',action:'Cuire saumon à la poêle · 4 min/côté'},
+  {time:'0:42',action:'Cuire steaks hachés · 3 min/côté · émietter'},
+  {time:'0:48',action:'Égoutter lentilles · lancer œufs durs (10 min)'},
+  {time:'1:00',action:'Tout refroidit · boîtes hermétiques · étiqueter'},
+  {time:'1:30',action:'✅ Frigo Lundi → Vendredi opérationnel'},
+];
+let batchState = JSON.parse(localStorage.getItem('ybatch')||'{}');
+function renderBatch(){
+  document.getElementById('batchList').innerHTML = batchItems.map((b,i)=>`
+    <div class="batch-row">
+      <div class="b-chk ${batchState['b'+i]?'on':''}" onclick="toggleBatch('b${i}',this)">${batchState['b'+i]?'✓':''}</div>
+      <div style="flex:1"><div class="b-nm">${b.nm}</div><div class="b-dt">${b.method} · ${b.cons}</div></div>
+      <div class="b-qty">${b.qty}</div>
+    </div>`).join('');
+  document.getElementById('batchOrder').innerHTML = batchOrder.map(o=>`
+    <div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:17px;color:var(--gold);letter-spacing:1px;flex-shrink:0;width:42px;">${o.time}</div>
+      <div style="font-size:13px;color:var(--light);line-height:1.5;">${o.action}</div>
+    </div>`).join('');
+}
+function toggleBatch(key,el){batchState[key]=!batchState[key];el.classList.toggle('on');el.textContent=batchState[key]?'✓':'';localStorage.setItem('ybatch',JSON.stringify(batchState));}
+renderBatch();
+
+// COURSES
+const coursesData = [
+  {cat:'🥩 Protéines',items:[
+    {nm:'Blanc de poulet',qty:'1 kg'},{nm:'Saumon pavés',qty:'400 g'},{nm:'Steak haché 5% MG',qty:'600 g'},
+    {nm:'Bœuf haché 5% MG',qty:'300 g'},{nm:'Œufs',qty:'×15'},{nm:'Skyr nature',qty:'500 g'},{nm:'Fromage blanc 0%',qty:'500 g'}
+  ]},
+  {cat:'🍚 Glucides SG',items:[
+    {nm:'Riz basmati SG',qty:'800 g'},{nm:'Patate douce',qty:'600 g'},{nm:'Flocons avoine SG',qty:'500 g'},
+    {nm:'Lentilles corail',qty:'300 g'},{nm:'Bananes',qty:'×7'}
+  ]},
+  {cat:'🥦 Légumes',items:[
+    {nm:'Brocoli surgelé',qty:'600 g'},{nm:'Haricots verts surgelés',qty:'500 g'},{nm:'Épinards surgelés',qty:'400 g'},
+    {nm:'Poivrons',qty:'×4'},{nm:'Mélange wok SG',qty:'400 g'},{nm:'Tomates cerises',qty:'250 g'}
+  ]},
+  {cat:'🥑 Lipides & Oléagineux',items:[
+    {nm:'Huile d\'olive',qty:'500 ml'},{nm:'Avocats',qty:'×4'},{nm:'Amandes',qty:'150 g'},
+    {nm:'Noix de cajou',qty:'100 g'},{nm:'Beurre d\'amande',qty:'200 g'},{nm:'Graines de chia',qty:'100 g'}
+  ]},
+  {cat:'🍓 Fruits & Antioxydants',items:[
+    {nm:'Fruits rouges surgelés',qty:'500 g'},{nm:'Myrtilles fraîches',qty:'125 g'},{nm:'Citrons',qty:'×4'}
+  ]},
+  {cat:'🧴 Condiments SG',items:[
+    {nm:'Tamari sans gluten',qty:'1 bouteille'},{nm:'Moutarde SG',qty:'1 pot'},
+    {nm:'Curcuma poudre',qty:'1 pot'},{nm:'Poivre noir moulu',qty:'1 moulin'},{nm:'Bouillon poulet SG',qty:'×4 cubes'}
+  ]},
+  {cat:'💊 Compléments à vérifier',items:[
+    {nm:'Créatine Monohydrate',qty:'5g/j'},{nm:'Whey Isolat Eiyolab',qty:'25-30g/séance'},
+    {nm:'Oméga-3 EPA/DHA',qty:'2-3g/j'},{nm:'D3+K2 Nutri&Co',qty:'4000 UI/j'},
+    {nm:'Magnésium Bisglycinate',qty:'300-400mg/j'},{nm:'Collagène Marin + Vit C',qty:'10g/j'},
+    {nm:'Ashwagandha KSM-66',qty:'600mg/j'},{nm:'Zinc Bisglycinate',qty:'15mg/j'}
+  ]}
+];
+let coursesState = JSON.parse(localStorage.getItem('ycoursesState')||'{}');
+function renderCourses(){
+  document.getElementById('coursesList').innerHTML = coursesData.map((cat,ci)=>`
+    <div class="course-cat">
+      <div class="course-cat-title">${cat.cat}</div>
+      ${cat.items.map((item,ii)=>{
+        const key=`${ci}-${ii}`;const done=coursesState[key];
+        return`<div class="course-item ${done?'done':''}" onclick="toggleCourse('${key}',this)">
+          <div class="ci-chk">${done?'✓':''}</div>
+          <span class="ci-name">${item.nm}</span>
+          <span class="ci-qty">${item.qty}</span>
+        </div>`;
+      }).join('')}
+    </div>`).join('');
+}
+function toggleCourse(key,el){coursesState[key]=!coursesState[key];localStorage.setItem('ycoursesState',JSON.stringify(coursesState));renderCourses();}
+function resetCourses(){if(confirm('Réinitialiser la liste ?')){coursesState={};localStorage.setItem('ycoursesState','{}');renderCourses();}}
+function checkAllCourses(){coursesData.forEach((c,ci)=>c.items.forEach((_,ii)=>coursesState[`${ci}-${ii}`]=true));localStorage.setItem('ycoursesState',JSON.stringify(coursesState));renderCourses();}
+renderCourses();
+
+// SEANCES
+const seances = [
+  {ico:'🏋️',nm:'Lundi — Push + Abdos'},
+  {ico:'🏅',nm:'Mardi 19h — Hyrox'},
+  {ico:'🔗',nm:'Mercredi — Pull + Abdos'},
+  {ico:'🏃',nm:'Jeudi — Course Zone 2'},
+  {ico:'🦵',nm:'Vendredi — Legs + Abdos'},
+  {ico:'🏅',nm:'Samedi midi — Hyrox'},
+  {ico:'🚴',nm:'Dimanche — Vélo / Run'},
+];
+document.getElementById('seancesList').innerHTML = seances.map((s,i)=>`
+  <div class="sc-card" onclick="toggleSeance(this)">
+    <div class="sc-ico">${s.ico}</div>
+    <div class="sc-nm">${s.nm}</div>
+    <div class="sc-chk"></div>
+  </div>`).join('');
+function toggleSeance(el){
+  el.classList.toggle('done');el.querySelector('.sc-chk').textContent=el.classList.contains('done')?'✓':'';
+  const done=document.querySelectorAll('.sc-card.done').length;
+  document.getElementById('seanceCount').textContent=done>=seances.length?`${done}/${seances.length} ✅ Semaine parfaite !`:`${done}/${seances.length} séances cette semaine`;
+  document.getElementById('seanceCount').style.color=done>=seances.length?'var(--gold)':'var(--muted)';
+}
+
+// MESURES
+const mesFields=[
+  {key:'bras',label:'Tour de bras',unit:'cm'},{key:'poitrine',label:'Poitrine',unit:'cm'},
+  {key:'taille',label:'Tour de taille',unit:'cm'},{key:'hanches',label:'Hanches',unit:'cm'},
+  {key:'cuisse',label:'Haut de cuisse',unit:'cm'},
+];
+document.getElementById('mesInputs').innerHTML=mesFields.map(f=>`
+  <div class="mes-row">
+    <div class="mes-lbl">${f.label}</div>
+    <input class="mes-inp" type="number" id="mes_${f.key}" placeholder="—" step="0.1">
+    <div class="mes-unit">${f.unit}</div>
+  </div>`).join('');
+
+// WEIGHT
+let W=parseFloat(localStorage.getItem('yw')||'0');
+let H=JSON.parse(localStorage.getItem('yh')||'[]');
+let mH=JSON.parse(localStorage.getItem('ymh')||'[]');
+function updW(){document.getElementById('wDisp').innerHTML=W>0?`${W.toFixed(1)}<span> kg</span>`:`—<span> kg</span>`;}
+function cw(d){if(!W)W=85;W=Math.round((W+d)*10)/10;W=Math.max(40,Math.min(200,W));updW();localStorage.setItem('yw',W);}
+function saveTout(){
+  if(W>0){H.unshift({date:new Date().toLocaleDateString('fr-FR'),val:W});if(H.length>12)H.pop();localStorage.setItem('yh',JSON.stringify(H));rendH();}
+  const entry={date:new Date().toLocaleDateString('fr-FR'),vals:{}};let hasVal=false;
+  mesFields.forEach(f=>{const v=parseFloat(document.getElementById('mes_'+f.key).value);if(!isNaN(v)){entry.vals[f.key]=v;hasVal=true;}});
+  if(hasVal){mH.unshift(entry);if(mH.length>12)mH.pop();localStorage.setItem('ymh',JSON.stringify(mH));rendMH();}
+  mesFields.forEach(f=>document.getElementById('mes_'+f.key).value='');
+  const b=document.querySelector('.save-btn');b.textContent='✅ Enregistré !';setTimeout(()=>b.textContent='📌 Enregistrer poids & mesures',2000);
+}
+function rendH(){
+  const c=document.getElementById('wHist');if(!H.length){c.innerHTML='';return;}
+  c.innerHTML=`<div class="h-lbl">Historique poids</div>`+H.map((e,i)=>{
+    const prev=H[i+1];const diff=prev?`<span class="h-diff ${e.val-prev.val<0?'neg':'pos'}">${e.val-prev.val>0?'+':''}${(e.val-prev.val).toFixed(1)} kg</span>`:'';
+    return`<div class="h-row"><span class="h-date">${e.date}</span><span class="h-val">${e.val.toFixed(1)} kg</span>${diff}</div>`;
+  }).join('');
+}
+function rendMH(){
+  const c=document.getElementById('mesHist');if(!mH.length){c.innerHTML='';return;}
+  c.innerHTML=`<div class="h-lbl">Historique mesures</div>`+mH.map((entry,i)=>{
+    const prev=mH[i+1];
+    const rows=mesFields.filter(f=>entry.vals[f.key]!==undefined).map(f=>{
+      const val=entry.vals[f.key];let diff='';
+      if(prev&&prev.vals[f.key]!==undefined){const d=val-prev.vals[f.key];diff=`<span class="h-diff ${d<0?'neg':'pos'}">${d>0?'+':''}${d.toFixed(1)}</span>`;}
+      return`<div class="h-row"><span class="h-date">${f.label}</span><span class="h-val">${val}cm ${diff}</span></div>`;
+    }).join('');
+    return`<div style="margin-top:10px;"><div style="font-size:11px;color:var(--gold);font-weight:700;padding:5px 0;">📅 ${entry.date}</div>${rows}</div>`;
+  }).join('');
+}
+
+// SUPPLEMENTS CHECK
+function chk(el){el.classList.toggle('on');el.textContent=el.classList.contains('on')?'✓':'';}
+function toggleT(el){el.classList.toggle('open');}
+function toggleStr(el){el.classList.toggle('open');}
+
+// RACE COUNTDOWNS
+function updRaces(){
+  const now=new Date();
+  const semi=new Date('2026-05-16');const hyrox=new Date('2026-05-29');
+  const sd=Math.max(0,Math.ceil((semi-now)/86400000));
+  const hd=Math.max(0,Math.ceil((hyrox-now)/86400000));
+  document.getElementById('semiDays').textContent=sd<=0?'JOUR J 🏃':sd;
+  document.getElementById('hyroxDays').textContent=hd<=0?'JOUR J 🏅':hd;
+}
+
+function navTo(id,btn){
+  document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
+}
+
+// PROTECTION
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&['u','s','a'].includes(e.key.toLowerCase()))e.preventDefault();if(e.key==='F12')e.preventDefault();});
+
+updW();rendH();rendMH();updRaces();
+setInterval(updRaces,3600000);
+</script>
+</body>
+</html>
