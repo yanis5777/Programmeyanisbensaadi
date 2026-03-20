@@ -300,12 +300,13 @@ body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;fo
 <nav class="nav" id="mainNav">
   <button class="nb on" onclick="navTo('planning',this)">Planning</button>
   <button class="nb" onclick="navTo('training',this)">Training</button>
+  <button class="nb" onclick="navTo('suppl',this)">Compléments</button>
   <button class="nb" onclick="navTo('etirements',this)">Étirements</button>
   <button class="nb" onclick="navTo('nutrition',this)">Nutrition</button>
   <button class="nb" onclick="navTo('batch',this)">Batch</button>
   <button class="nb" onclick="navTo('courses',this)">Courses</button>
-  <button class="nb" onclick="navTo('essentiels',this)">Essentiels</button>
   <button class="nb" onclick="navTo('tracker',this)">Mesures</button>
+  <button class="nb" onclick="navTo('essentiels',this)">Essentiels</button>
 </nav>
 
 <!-- PLANNING -->
@@ -499,7 +500,7 @@ body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;fo
   </div>
 
   <!-- COMPLÉMENTS intégrés ici -->
-  <div style="margin-top:16px;">
+  <div style="margin-top:16px;" id="suppl">
     <div style="font-size:10px;color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px;">💊 Compléments · Coche chaque prise</div>
 
     <div style="background:rgba(255,200,80,0.06);border:1px solid rgba(255,200,80,0.22);border-radius:14px;padding:16px;margin-bottom:10px;">
@@ -517,7 +518,7 @@ body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;fo
         <span style="font-size:11px;font-weight:800;color:#50DC78;text-transform:uppercase;letter-spacing:0.12em;">Midi · Avec le déjeuner</span>
       </div>
       <div class="s-row"><div class="s-chk" onclick="chk(this)"></div><div><div class="s-nm">Oméga-3 EPA/DHA</div><div class="s-time">1-1,5g EPA+DHA · avec matières grasses du repas</div></div></div>
-      <div class="s-row"><div class="s-chk" onclick="chk(this)"></div><div><div class="s-nm">Bêta-Alanine — dose 1</div><div class="s-time">1,6g · avec le repas</div></div></div>
+      <div class="s-row"><div class="s-chk" onclick="chk(this)"></div><div><div class="s-nm">Bêta-Alanine — dose 1</div><div class="s-time">1,6g · 45 min avant la séance · ou avec le déjeuner si pas de séance</div></div></div>
     </div>
 
     <div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.22);border-radius:14px;padding:16px;margin-bottom:10px;">
@@ -535,7 +536,7 @@ body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;fo
         <span style="font-size:11px;font-weight:800;color:#80C0FF;text-transform:uppercase;letter-spacing:0.12em;">Dîner · Avec le repas du soir</span>
       </div>
       <div class="s-row"><div class="s-chk" onclick="chk(this)"></div><div><div class="s-nm">Oméga-3 EPA/DHA — dose 2</div><div class="s-time">1-1,5g EPA+DHA · avec le dîner</div></div></div>
-      <div class="s-row"><div class="s-chk" onclick="chk(this)"></div><div><div class="s-nm">Bêta-Alanine — dose 2</div><div class="s-time">1,6g · avec le repas</div></div></div>
+      <div class="s-row"><div class="s-chk" onclick="chk(this)"></div><div><div class="s-nm">Bêta-Alanine — dose 2</div><div class="s-time">1,6g · avec le dîner</div></div></div>
     </div>
 
     <div style="background:rgba(200,80,255,0.05);border:1px solid rgba(200,80,255,0.18);border-radius:14px;padding:16px;">
@@ -554,7 +555,7 @@ body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;fo
 <section class="sec" id="etirements">
   <div class="stag">Soir · Avant le coucher · 15-20 min</div>
   <h2 class="stitle">ÉTIREMENTS<br>DU SOIR</h2>
-  <p style="font-size:14px;color:var(--light);margin-bottom:20px;line-height:1.7;">Conçus pour toi : coureur + muscu + boulot assis. Rester grand, droit, souple. À faire chaque soir, 10-20 min suffisent.</p>
+  <p style="font-size:14px;color:var(--light);margin-bottom:20px;line-height:1.7;">Mon protocole soir — rester grand, droit et souple. Prévenir les blessures avant qu'elles arrivent. 10-20 min chaque soir.</p>
 
   <!-- TIMER ÉTIREMENT -->
   <div style="background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.25);border-radius:20px;padding:22px 18px;margin-bottom:20px;text-align:center;">
@@ -897,29 +898,51 @@ const fd = [
   ]}
 ];
 
-document.getElementById('foodDays').innerHTML = fd.map(d=>`
-  <div class="f-card">
+const dayColors = [
+  {border:'rgba(80,220,120,0.30)',bg:'rgba(80,220,120,0.05)',tag:'#50DC78'},   // Lundi - vert
+  {border:'rgba(201,168,76,0.35)',bg:'rgba(201,168,76,0.06)',tag:'var(--gold-light)'},  // Mardi Hyrox - or
+  {border:'rgba(80,160,255,0.30)',bg:'rgba(80,160,255,0.05)',tag:'#60A8FF'},   // Mercredi - bleu
+  {border:'rgba(255,160,40,0.30)',bg:'rgba(255,160,40,0.05)',tag:'#FFA028'},   // Jeudi run - orange
+  {border:'rgba(200,80,255,0.28)',bg:'rgba(200,80,255,0.05)',tag:'#C850FF'},   // Vendredi legs - violet
+];
+
+const mealColors = {
+  'Petit-déjeuner':'#F0C060',
+  'Déjeuner':'#50DC78','Déjeuner · boulot':'#50DC78',
+  'Collation':'#60A8FF','Collation 16h':'#60A8FF','Collation 16h · pré-Hyrox':'#60A8FF',
+  'Dîner':'#FF8FAD','Dîner pré-séance':'#FF8FAD','Dîner post-Hyrox':'#FF8FAD','Dîner post-run':'#FF8FAD','Dîner post-Legs':'#FF8FAD',
+  'Post-séance':'#C9A84C','Post-Hyrox':'#C9A84C','Post-run':'#C9A84C',
+};
+
+document.getElementById('foodDays').innerHTML = fd.map((d,di)=>{
+  const dc = dayColors[di] || dayColors[0];
+  return `
+  <div class="f-card" style="border-color:${dc.border};background:${dc.bg}">
     <div class="f-hd" onclick="this.parentElement.classList.toggle('open')">
       <div>
-        <div class="f-title">${d.day}</div>
+        <div class="f-title" style="color:${dc.tag}">${d.day}</div>
         <div class="f-mac">
           <span class="mc">Prot <span>${d.prot}g</span></span>
           <span class="mc">Gluc <span>${d.gluc}g</span></span>
           <span class="mc">${d.kcal} kcal</span>
         </div>
       </div>
-      <span style="color:var(--gold);font-size:16px;margin-top:4px;">▼</span>
+      <span style="color:${dc.tag};font-size:16px;margin-top:4px;">▼</span>
     </div>
     <div class="f-bd">
-      ${d.meals.map(m=>`
-        <div class="meal">
-          <div class="mlbl">${m.l}</div>
+      ${d.meals.map(m=>{
+        const mc = mealColors[m.l] || 'var(--gold)';
+        return `
+        <div class="meal" style="border-left:3px solid ${mc}22;padding-left:10px;margin-left:-10px;">
+          <div class="mlbl" style="color:${mc}">${m.l}</div>
           <div class="mnm">${m.n}</div>
           <div class="ming">${m.i}</div>
           ${m.w?`<div class="mwhy">→ ${m.w}</div>`:''}
-        </div>`).join('')}
+        </div>`;
+      }).join('')}
     </div>
-  </div>`).join('');
+  </div>`;
+}).join('');
 
 // BATCH
 const batchItems = [
@@ -1217,7 +1240,7 @@ function navTo(id,btn){
 }
 
 // ── NAV SCROLL TRACKING
-const ySecIds = ['planning','training','etirements','nutrition','batch','courses','essentiels','tracker'];
+const ySecIds = ['planning','training','suppl','etirements','nutrition','batch','courses','tracker','essentiels'];
 const yNavBtns = document.querySelectorAll('.nb');
 
 const yObserver = new IntersectionObserver((entries)=>{
@@ -1232,7 +1255,7 @@ const yObserver = new IntersectionObserver((entries)=>{
       }
     }
   });
-},{threshold:0.25, rootMargin:'-60px 0px -45% 0px'});
+},{threshold:0.15, rootMargin:'-65px 0px -30% 0px'});
 
 ySecIds.forEach(id=>{
   const el=document.getElementById(id);
