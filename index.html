@@ -202,15 +202,20 @@ body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;fo
 .sc-chk{width:24px;height:24px;border:2px solid rgba(255,255,255,0.20);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--bg);flex-shrink:0;transition:all 0.2s}
 .sc-card.done .sc-chk{background:var(--gold);border-color:var(--gold)}
 
-.ess-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:10px}
+.ess-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:10px;cursor:pointer}
 .ess-card.testo{background:rgba(201,168,76,0.05);border-color:rgba(201,168,76,0.25)}
 .ess-card.peau{background:rgba(80,160,255,0.04);border-color:rgba(80,160,255,0.20)}
 .ess-card.recup{background:rgba(200,80,255,0.04);border-color:rgba(200,80,255,0.18)}
 .ess-card.perf{background:rgba(80,220,120,0.04);border-color:rgba(80,220,120,0.20)}
-.ess-title{font-size:14px;font-weight:700;color:var(--gold-light);margin-bottom:10px}
+.ess-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 18px}
+.ess-title{font-size:14px;font-weight:700;color:var(--gold-light);margin:0}
 .ess-card.peau .ess-title{color:#80C0FF}
 .ess-card.recup .ess-title{color:#D080FF}
 .ess-card.perf .ess-title{color:#50DC78}
+.ess-chv{color:var(--muted);font-size:12px;transition:transform 0.3s;flex-shrink:0}
+.ess-card.open .ess-chv{transform:rotate(180deg)}
+.ess-body{display:none;padding:0 18px 16px;border-top:1px solid rgba(255,255,255,0.05)}
+.ess-card.open .ess-body{display:block}
 .ess-item{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
 .ess-item:last-child{border-bottom:none}
 .ess-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);margin-top:9px;flex-shrink:0}
@@ -292,7 +297,7 @@ body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;fo
 </section>
 
 <!-- NAV -->
-<nav class="nav">
+<nav class="nav" id="mainNav">
   <button class="nb on" onclick="navTo('planning',this)">Planning</button>
   <button class="nb" onclick="navTo('training',this)">Training</button>
   <button class="nb" onclick="navTo('etirements',this)">Étirements</button>
@@ -782,38 +787,46 @@ body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;fo
   <div class="stag">Santé · Testostérone · Peau · Hyrox</div>
   <h2 class="stitle">MES<br>ESSENTIELS</h2>
 
-  <div class="ess-card testo">
-    <div class="ess-title">🥩 Aliments testostérone & masse sèche</div>
-    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Steak haché 5% MG</strong> — Zinc + fer héminique + créatine naturelle. 2-3x/semaine. Midi de préférence pour absorption maximale.</div></div>
+  <div class="ess-card testo" onclick="this.classList.toggle('open')">
+    <div class="ess-hd"><div class="ess-title">🥩 Aliments testostérone & masse sèche</div><span class="ess-chv">▼</span></div>
+    <div class="ess-body">
+      <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Steak haché 5% MG</strong> — Zinc + fer héminique + créatine naturelle. 2-3x/semaine. Midi de préférence pour absorption maximale.</div></div>
     <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Œufs entiers (3-4/jour)</strong> — Cholestérol précurseur de testostérone + Vit D + choline. Ne jamais jeter les jaunes.</div></div>
     <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Saumon sauvage 2x/sem</strong> — Oméga-3 EPA/DHA + Vit D. Absorbés pendant le sommeil. Anti-inflammatoire musculaire.</div></div>
     <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Avocat quotidien</strong> — Acides gras monoinsaturés essentiels à la synthèse hormonale. ½ avocat suffit.</div></div>
     <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Amandes + Noix de cajou</strong> — Zinc + magnésium + selenium. Poignée (25g) en collation quotidienne.</div></div>
+    </div>
   </div>
 
-  <div class="ess-card peau">
-    <div class="ess-title">✨ Peau · Collagène · Anti-âge</div>
-    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Collagène marin + Vit C</strong> — Actif dès 8 semaines. Peau, tendons, cartilages. À jeun le matin = absorption maximale.</div></div>
+  <div class="ess-card peau" onclick="this.classList.toggle('open')">
+    <div class="ess-hd"><div class="ess-title">✨ Peau · Collagène · Anti-âge</div><span class="ess-chv">▼</span></div>
+    <div class="ess-body">
+      <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Collagène marin + Vit C</strong> — Actif dès 8 semaines. Peau, tendons, cartilages. À jeun le matin = absorption maximale.</div></div>
     <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Fruits rouges quotidiens</strong> — Antioxydants N°1. Anti-inflammation post-effort. Protègent l'ADN. 80-100g/jour.</div></div>
     <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Curcuma + poivre noir</strong> — La pipérine du poivre augmente l'absorption de curcumine de 2000%. Dans tous les plats.</div></div>
     <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Hydratation 2,5L/jour</strong> — +500ml par heure de sport intense. L'hydratation est le facteur n°1 de la qualité de peau.</div></div>
+    </div>
   </div>
 
-  <div class="ess-card recup">
-    <div class="ess-title">🧠 Récupération · Sommeil · GH</div>
-    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Coucher avant 23h30</strong> — La GH (brûle graisses + répare muscles) est sécrétée entre minuit et 3h en sommeil profond. C'est irrecouvrable.</div></div>
+  <div class="ess-card recup" onclick="this.classList.toggle('open')">
+    <div class="ess-hd"><div class="ess-title">🧠 Récupération · Sommeil · GH</div><span class="ess-chv">▼</span></div>
+    <div class="ess-body">
+      <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Coucher avant 23h30</strong> — La GH (brûle graisses + répare muscles) est sécrétée entre minuit et 3h en sommeil profond. C'est irrecouvrable.</div></div>
     <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>7-8h de sommeil</strong> — La testostérone se reconstitue pendant le sommeil. -1h de sommeil = -15% de testostérone le lendemain.</div></div>
     <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Magnésium + Ashwagandha le soir</strong> — Synergie prouvée : -27% cortisol, meilleure qualité de sommeil, récupération musculaire accélérée.</div></div>
     <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Foam roller post-séance</strong> — 10 min sur quads, ischios, IT band, mollets. Réduit courbatures de 40% et prévient les blessures du coureur.</div></div>
+    </div>
   </div>
 
-  <div class="ess-card perf">
-    <div class="ess-title">🏅 Hyrox & Semi — Clés performance</div>
-    <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Zone 2 régulière</strong> — 2x/semaine minimum (jeudi + dimanche). La base aérobie détermine 70% de la performance Hyrox.</div></div>
+  <div class="ess-card perf" onclick="this.classList.toggle('open')">
+    <div class="ess-hd"><div class="ess-title">🏅 Hyrox & Semi — Clés performance</div><span class="ess-chv">▼</span></div>
+    <div class="ess-body">
+      <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Zone 2 régulière</strong> — 2x/semaine minimum (jeudi + dimanche). La base aérobie détermine 70% de la performance Hyrox.</div></div>
     <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Créatine tous les jours</strong> — La saturation est cumulative. Même les jours sans sport. 5g le matin, toujours.</div></div>
     <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Glucides pré-effort</strong> — Patate douce ou riz 1h30 avant chaque Hyrox. Glycogène = carburant de l'effort intense.</div></div>
     <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Électrolytes pendant</strong> — Sodium + potassium sur toute sortie >60 min. Prévient crampes et baisses brutales d'énergie.</div></div>
     <div class="ess-item"><div class="ess-dot"></div><div class="ess-text"><strong>Sans gluten</strong> — Réduit inflammation intestinale + améliore absorption nutriments + moins de fatigue chronique.</div></div>
+    </div>
   </div>
 
   <div class="subh">Règles d'or</div>
@@ -1202,6 +1215,29 @@ function navTo(id,btn){
   document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
 }
+
+// ── NAV SCROLL TRACKING
+const ySecIds = ['planning','training','etirements','nutrition','batch','courses','essentiels','tracker'];
+const yNavBtns = document.querySelectorAll('.nb');
+
+const yObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const id = entry.target.id;
+      yNavBtns.forEach(b=>b.classList.remove('on'));
+      const btn = document.querySelector(`.nb[onclick*="'${id}'"]`);
+      if(btn){
+        btn.classList.add('on');
+        btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+      }
+    }
+  });
+},{threshold:0.25, rootMargin:'-60px 0px -45% 0px'});
+
+ySecIds.forEach(id=>{
+  const el=document.getElementById(id);
+  if(el) yObserver.observe(el);
+});
 
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&['u','s','a'].includes(e.key.toLowerCase()))e.preventDefault();if(e.key==='F12')e.preventDefault();});
