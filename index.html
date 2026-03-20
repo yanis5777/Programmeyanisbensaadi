@@ -53,7 +53,7 @@ body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;fo
 .wd.run{background:rgba(80,160,255,0.12);border-color:rgba(80,160,255,0.30)}
 .wd.muscu{background:rgba(80,220,120,0.10);border-color:rgba(80,220,120,0.25)}
 .wd.legs{background:rgba(200,80,255,0.10);border-color:rgba(200,80,255,0.28)}
-.wd.velo{background:rgba(255,160,40,0.10);border-color:rgba(255,160,40,0.25)}
+.wd.velo{background:rgba(0,210,180,0.10);border-color:rgba(0,210,180,0.28)}
 .wd-day{font-size:9px;font-weight:800;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase}
 .wd-ico{font-size:16px;margin:3px 0}
 .wd-type{font-size:8px;font-weight:700;color:var(--light);letter-spacing:0.03em}
@@ -61,7 +61,7 @@ body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;fo
 .wd.run .wd-type{color:#60A8FF}
 .wd.muscu .wd-type{color:#50DC78}
 .wd.legs .wd-type{color:#C850FF}
-.wd.velo .wd-type{color:#FFA028}
+.wd.velo .wd-type{color:#00D4B4}
 
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:10px;position:relative;overflow:hidden}
 .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
@@ -80,9 +80,9 @@ body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;fo
 .t-card.legs{background:rgba(200,80,255,0.04);border-color:rgba(200,80,255,0.20)}
 .t-card.legs .t-ico{background:linear-gradient(135deg,rgba(200,80,255,0.25),rgba(200,80,255,0.06))}
 .t-card.legs .t-inf{color:#C850FF}
-.t-card.velo{background:rgba(255,160,40,0.04);border-color:rgba(255,160,40,0.20)}
-.t-card.velo .t-ico{background:linear-gradient(135deg,rgba(255,160,40,0.25),rgba(255,160,40,0.06))}
-.t-card.velo .t-inf{color:#FFA028}
+.t-card.velo{background:rgba(0,210,180,0.04);border-color:rgba(0,210,180,0.22)}
+.t-card.velo .t-ico{background:linear-gradient(135deg,rgba(0,210,180,0.25),rgba(0,210,180,0.06))}
+.t-card.velo .t-inf{color:#00D4B4}
 .t-hd{padding:15px 16px;display:flex;align-items:center;gap:12px;cursor:pointer}
 .t-ico{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,rgba(201,168,76,0.25),rgba(201,168,76,0.08));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .t-nm{font-size:15px;font-weight:700;color:var(--white);flex:1}
@@ -830,12 +830,12 @@ body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;fo
   </div>
 
   <div class="subh">Règles d'or</div>
-  <div class="r-row"><div class="r-ico">💧</div><div><div class="r-nm">2,5L d'eau/jour</div><div class="r-desc">+500ml/heure de sport. Métabolisme +24% avec 500ml dès le réveil.</div></div></div>
-  <div class="r-row"><div class="r-ico">🥩</div><div><div class="r-nm">200g protéines · 5 repas</div><div class="r-desc">Max 40g absorbé par prise. Répartir sur la journée = masse musculaire maximale.</div></div></div>
-  <div class="r-row"><div class="r-ico">⚡</div><div><div class="r-nm">Créatine tous les jours</div><div class="r-desc">5g le matin même sans séance. Saturation musculaire = bénéfice constant.</div></div></div>
-  <div class="r-row"><div class="r-ico">😴</div><div><div class="r-nm">Coucher avant 23h30</div><div class="r-desc">GH + testostérone synthétisées pendant le sommeil. Pas de compromis.</div></div></div>
-  <div class="r-row"><div class="r-ico">🧘</div><div><div class="r-nm">Étirements chaque soir</div><div class="r-desc">15 min minimum. Rester grand, droit, souple. Prévenir les blessures long terme.</div></div></div>
-  <div class="r-row"><div class="r-ico">🌿</div><div><div class="r-nm">Foam roller post-séance</div><div class="r-desc">Quads, ischios, IT band, mollets. Réduit courbatures -40%.</div></div></div>
+  <div class="ess-card testo" onclick="this.classList.toggle('open')"><div class="ess-hd"><div class="ess-title">💧 2,5L d'eau/jour</div><span class="ess-chv">▼</span></div><div class="ess-body"><div class="ess-text">+500ml/heure de sport. Métabolisme +24% avec 500ml dès le réveil. Hydratation = facteur n°1 performance et peau.</div></div></div>
+  <div class="ess-card testo" onclick="this.classList.toggle('open')"><div class="ess-hd"><div class="ess-title">🥩 200g protéines · 5 repas</div><span class="ess-chv">▼</span></div><div class="ess-body"><div class="ess-text">Max 40g absorbé par prise. Répartir sur la journée = masse musculaire maximale.</div></div></div>
+  <div class="ess-card testo" onclick="this.classList.toggle('open')"><div class="ess-hd"><div class="ess-title">⚡ Créatine tous les jours</div><span class="ess-chv">▼</span></div><div class="ess-body"><div class="ess-text">5g post-séance avec la Whey. Jours sans sport : avec le petit-déj. Saturation cumulative = bénéfice constant.</div></div></div>
+  <div class="ess-card recup" onclick="this.classList.toggle('open')"><div class="ess-hd"><div class="ess-title">😴 Coucher avant 23h30</div><span class="ess-chv">▼</span></div><div class="ess-body"><div class="ess-text">GH + testostérone synthétisées pendant le sommeil. Pas de compromis.</div></div></div>
+  <div class="ess-card perf" onclick="this.classList.toggle('open')"><div class="ess-hd"><div class="ess-title">🧘 Étirements chaque soir</div><span class="ess-chv">▼</span></div><div class="ess-body"><div class="ess-text">15 min minimum. Rester grand, droit, souple. Prévenir les blessures long terme.</div></div></div>
+  <div class="ess-card perf" onclick="this.classList.toggle('open')"><div class="ess-hd"><div class="ess-title">🌿 Foam roller post-séance</div><span class="ess-chv">▼</span></div><div class="ess-body"><div class="ess-text">Quads, ischios, IT band, mollets. Réduit courbatures -40%.</div></div></div>
 </section>
 
 <!-- FOOTER -->
@@ -870,7 +870,7 @@ const fd = [
   {day:'Mardi — Hyrox 19h',kcal:1798,prot:164,gluc:191,meals:[
     {l:'Petit-déjeuner',n:'Œufs brouillés & avocat',i:'3 œufs brouillés · ½ avocat · tomate',w:'Protéines + graisses saines le matin · cholestérol des œufs = précurseur testostérone'},
     {l:'Déjeuner · boulot',n:'Bowl poulet riz épinards',i:'160g poulet effiloché · 120g riz SG · épinards · huile d\'olive · herbes',w:'Protéine maigre + glucides = énergie disponible pour le Hyrox du soir'},
-    {l:'Collation 16h · pré-Hyrox',n:'Galette de riz SG + beurre d\'amande + skyr',i:'2 galettes de riz SG · 1cs beurre d\'amande · 150g skyr · 1h30 avant Hyrox',w:'Glucides rapides + protéines légères = énergie sans lourdeur digestive'},
+    {l:'Collation 16h · pré-Hyrox',n:'Flocons avoine + beurre d\'amande + skyr',i:'40g flocons avoine SG · 1cs beurre d\'amande · 150g skyr · 1h30 avant Hyrox',w:'Glucides rapides + protéines légères = énergie sans lourdeur digestive'},
     {l:'Dîner post-Hyrox',n:'Steak haché patate douce poivrons',i:'180g steak haché · 160g patate douce · poivrons · moutarde SG + oméga-3',w:'Zinc + fer post-effort = récupération musculaire + reconstitution testostérone nocturne'},
     {l:'Post-Hyrox',n:'Shaker Whey isolat',i:'25-30g whey · eau 300ml · dans l\'heure après',w:''}
   ]},
@@ -1006,11 +1006,11 @@ const coursesData = [
     {nm:'Noix de cajou',qty:'100 g'},{nm:'Beurre d\'amande',qty:'200 g'},{nm:'Graines de chia',qty:'100 g'}
   ]},
   {cat:'🍓 Fruits & Antioxydants',items:[
-    {nm:'Fruits rouges surgelés',qty:'500 g'},{nm:'Myrtilles fraîches',qty:'125 g'},{nm:'Citrons',qty:'×4'}
+    {nm:'Fruits rouges surgelés',qty:'500 g'},{nm:'Myrtilles fraîches',qty:'125 g'},{nm:'Citrons',qty:'×4'},{nm:'Pommes 🍏',qty:'×4'}
   ]},
-  {cat:'🧴 Condiments SG',items:[
+  {cat:'🧴 Condiments & Divers',items:[
     {nm:'Tamari sans gluten',qty:'1 bouteille'},{nm:'Moutarde SG',qty:'1 pot'},
-    {nm:'Curcuma poudre',qty:'1 pot'},{nm:'Poivre noir moulu',qty:'1 moulin'},{nm:'Bouillon poulet SG',qty:'×4 cubes'}
+    {nm:'Curcuma poudre',qty:'1 pot'},{nm:'Poivre noir moulu',qty:'1 moulin'},{nm:'Bouillon poulet SG',qty:'×4 cubes'},{nm:'Gingembre frais 🫚',qty:'1 morceau'},{nm:'Eau plate / gazeuse',qty:'× 6 L min'}
   ]},
   {cat:'💊 Compléments à vérifier',items:[
     {nm:'Créatine Monohydrate',qty:'5g/j'},{nm:'Whey Isolat Eiyolab',qty:'25-30g/séance'},
