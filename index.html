@@ -16,7 +16,7 @@
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;max-width:430px;margin:0 auto;overflow-x:hidden}
 
-.hero{min-height:100svh;background:linear-gradient(170deg,#0A0A0A 0%,#1A1508 50%,#0A0A0A 100%);position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:40px 28px 52px;overflow:hidden}
+.hero{min-height:auto;background:linear-gradient(170deg,#0A0A0A 0%,#1A1508 50%,#0A0A0A 100%);position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:60px 28px 48px;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-100px;right:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(201,168,76,0.18) 0%,transparent 65%);pointer-events:none}
 .hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.40);border-radius:4px;padding:6px 14px;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;width:fit-content}
 .hero h1{font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:0.95;letter-spacing:2px;color:var(--white);margin-bottom:6px}
@@ -860,7 +860,7 @@ body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;fo
 <script>
 // FOOD DATA — Lundi → Vendredi
 const fd = [
-  {day:'Lundi',kcal:1891,prot:156,gluc:226,meals:[
+  {day:'Lundi — Push + Abdos',kcal:1891,prot:156,gluc:226,meals:[
     {l:'Petit-déjeuner',n:'Porridge express',i:'60g flocons avoine SG · 1 banane · 1cs beurre d\'amande · chia · + D3K2',w:'Glucides complexes le matin = énergie soutenue · créatine avec repas glucidique = absorption optimale'},
     {l:'Déjeuner · boulot',n:'Bowl steak haché riz haricots',i:'150g steak haché 5% · 120g riz basmati SG · haricots verts · tamari SG',w:'Fer héminique + zinc + créatine naturelle · mieux absorbés en journée active'},
     {l:'Collation 16h',n:'Skyr & amandes',i:'200g skyr nature · 25g amandes · emporter en pot hermétique',w:'Caséine lente entre les repas + zinc/magnésium des amandes'},
@@ -874,7 +874,7 @@ const fd = [
     {l:'Dîner post-Hyrox',n:'Steak haché patate douce poivrons',i:'180g steak haché · 160g patate douce · poivrons · moutarde SG + oméga-3',w:'Zinc + fer post-effort = récupération musculaire + reconstitution testostérone nocturne'},
     {l:'Post-Hyrox',n:'Shaker Whey isolat',i:'25-30g whey · eau 300ml · dans l\'heure après',w:''}
   ]},
-  {day:'Mercredi',kcal:1744,prot:164,gluc:197,meals:[
+  {day:'Mercredi — Pull + Abdos',kcal:1744,prot:164,gluc:197,meals:[
     {l:'Petit-déjeuner',n:'Porridge chia banane',i:'60g flocons SG · 1 banane · chia · cannelle · eau chaude',w:'Rapide · 5 min · fibres + glucides complexes'},
     {l:'Déjeuner · boulot',n:'Bowl steak haché lentilles brocoli',i:'150g steak haché · 150g lentilles · brocoli · moutarde SG',w:'Combo fer héminique + non héminique avec Vit C du brocoli = absorption maximale du fer'},
     {l:'Collation 16h',n:'Skyr & fruits rouges',i:'200g skyr · 80g fruits rouges décongelés · emporter en pot',w:'Antioxydants post-effort · réduisent stress oxydatif · bonne peau'},
