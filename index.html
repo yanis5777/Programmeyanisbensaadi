@@ -391,7 +391,7 @@ body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;fo
       <span class="chv">▼</span>
     </div>
     <div class="t-bd">
-      <p class="t-txt">Entraînement Hyrox collectif fixe à 19h. <strong style="color:var(--white);">Collation 1h30 avant :</strong> flocons d'avoine SG + beurre d'amande + skyr (glucides + protéines légers). Shaker Whey + Créatine dans l'heure qui suit.</p>
+      <p class="t-txt">Entraînement Hyrox collectif fixe à 19h. <strong style="color:var(--white);">Collation 1h30 avant :</strong> flocons d'avoine SG + beurre de cacahuète + skyr (glucides + protéines légers). Shaker Whey + Créatine dans l'heure qui suit.</p>
       
     </div>
   </div>
@@ -724,15 +724,15 @@ body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;fo
   <div class="stag">2 450 kcal · 200g protéines · Sans gluten</div>
   <h2 class="stitle">PLAN<br>NUTRITIONNEL</h2>
   <p style="font-size:12px;color:var(--muted);margin-bottom:8px;font-style:italic;">Lundi → Vendredi · Weekend libre · Chaque choix alimentaire a une raison scientifique</p>
-  <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.22);border-radius:12px;padding:12px 14px;margin-bottom:18px;">
-    <div style="font-size:11px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">🍽️ Si encore faim — options libres</div>
-    <div style="display:flex;flex-direction:column;gap:6px;">
-      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--light);">🥑 Toast avocat sur pain sans gluten</div>
-      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--light);">🥛 Bol fromage blanc + whey + oléagineux</div>
-      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--light);">🍓 Skyr + fruits rouges + amandes</div>
-      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--light);">🥚 2-3 œufs durs</div>
-      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--light);">🍌 Banane + beurre d'amande</div>
-      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--light);">🥜 Noix de cajou ou amandes (25g max)</div>
+  <div class="ess-card testo" onclick="this.classList.toggle('open')" style="margin-bottom:18px;">
+    <div class="ess-hd"><div class="ess-title">🍽️ Si encore faim — options libres</div><span class="ess-chv">▼</span></div>
+    <div class="ess-body">
+      <div class="ess-item"><div class="ess-dot"></div><div class="ess-text">🥑 Toast avocat sur pain sans gluten</div></div>
+      <div class="ess-item"><div class="ess-dot"></div><div class="ess-text">🥛 Bol fromage blanc + whey + oléagineux</div></div>
+      <div class="ess-item"><div class="ess-dot"></div><div class="ess-text">🍓 Skyr + fruits rouges + amandes</div></div>
+      <div class="ess-item"><div class="ess-dot"></div><div class="ess-text">🥚 2-3 œufs durs</div></div>
+      <div class="ess-item"><div class="ess-dot"></div><div class="ess-text">🍌 Banane + beurre de cacahuète</div></div>
+      <div class="ess-item"><div class="ess-dot"></div><div class="ess-text">🥜 Noix de cajou ou amandes (25g max)</div></div>
     </div>
   </div>
   <div id="foodDays"></div>
@@ -830,8 +830,8 @@ body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;fo
   </div>
 
   <div class="subh">Règles d'or</div>
-  <div class="ess-card testo" onclick="this.classList.toggle('open')"><div class="ess-hd"><div class="ess-title">💧 2,5L d'eau/jour</div><span class="ess-chv">▼</span></div><div class="ess-body"><div class="ess-text">+500ml/heure de sport. Métabolisme +24% avec 500ml dès le réveil. Hydratation = facteur n°1 performance et peau.</div></div></div>
-  <div class="ess-card testo" onclick="this.classList.toggle('open')"><div class="ess-hd"><div class="ess-title">🥩 200g protéines · 5 repas</div><span class="ess-chv">▼</span></div><div class="ess-body"><div class="ess-text">Max 40g absorbé par prise. Répartir sur la journée = masse musculaire maximale.</div></div></div>
+  <div class="ess-card peau" onclick="this.classList.toggle('open')"><div class="ess-hd"><div class="ess-title">💧 2,5L d'eau/jour</div><span class="ess-chv">▼</span></div><div class="ess-body"><div class="ess-text">+500ml/heure de sport. Métabolisme +24% avec 500ml dès le réveil. Hydratation = facteur n°1 performance et peau.</div></div></div>
+  <div class="ess-card perf" onclick="this.classList.toggle('open')"><div class="ess-hd"><div class="ess-title">🥩 200g protéines · 5 repas</div><span class="ess-chv">▼</span></div><div class="ess-body"><div class="ess-text">Max 40g absorbé par prise. Répartir sur la journée = masse musculaire maximale.</div></div></div>
   <div class="ess-card testo" onclick="this.classList.toggle('open')"><div class="ess-hd"><div class="ess-title">⚡ Créatine tous les jours</div><span class="ess-chv">▼</span></div><div class="ess-body"><div class="ess-text">5g post-séance avec la Whey. Jours sans sport : avec le petit-déj. Saturation cumulative = bénéfice constant.</div></div></div>
   <div class="ess-card recup" onclick="this.classList.toggle('open')"><div class="ess-hd"><div class="ess-title">😴 Coucher avant 23h30</div><span class="ess-chv">▼</span></div><div class="ess-body"><div class="ess-text">GH + testostérone synthétisées pendant le sommeil. Pas de compromis.</div></div></div>
   <div class="ess-card perf" onclick="this.classList.toggle('open')"><div class="ess-hd"><div class="ess-title">🧘 Étirements chaque soir</div><span class="ess-chv">▼</span></div><div class="ess-body"><div class="ess-text">15 min minimum. Rester grand, droit, souple. Prévenir les blessures long terme.</div></div></div>
@@ -860,38 +860,38 @@ body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;fo
 <script>
 // FOOD DATA — Lundi → Vendredi
 const fd = [
-  {day:'Lundi — Push + Abdos',kcal:1891,prot:156,gluc:226,meals:[
-    {l:'Petit-déjeuner',n:'Porridge express',i:'60g flocons avoine SG · 1 banane · 1cs beurre d\'amande · chia · + D3K2',w:'Glucides complexes le matin = énergie soutenue · créatine avec repas glucidique = absorption optimale'},
+  {day:'Lundi',kcal:1891,prot:156,gluc:226,meals:[
+    {l:'Petit-déjeuner',n:'Porridge express',i:'60g flocons avoine SG · 1 banane · 1cs beurre de cacahuète · chia',w:'Glucides complexes le matin = énergie soutenue · D3K2 avec matières grasses pour absorption optimale'},
     {l:'Déjeuner · boulot',n:'Bowl steak haché riz haricots',i:'150g steak haché 5% · 120g riz basmati SG · haricots verts · tamari SG',w:'Fer héminique + zinc + créatine naturelle · mieux absorbés en journée active'},
     {l:'Collation 16h',n:'Skyr & amandes',i:'200g skyr nature · 25g amandes · emporter en pot hermétique',w:'Caséine lente entre les repas + zinc/magnésium des amandes'},
-    {l:'Dîner pré-séance',n:'Saumon patate douce brocoli',i:'160g saumon · 180g patate douce · brocoli · citron · huile d\'olive · + oméga-3',w:'Oméga-3 absorbés pendant le sommeil · anti-inflammatoire · peau sèche'},
+    {l:'Dîner post-séance',n:'Saumon patate douce brocoli',i:'160g saumon · 180g patate douce · brocoli · citron · huile d\'olive · + oméga-3',w:'Oméga-3 absorbés pendant le sommeil · anti-inflammatoire · peau sèche'},
     {l:'Post-séance',n:'Shaker Whey isolat',i:'25-30g whey isolat + 5g créatine · eau froide 300ml',w:'Fenêtre anabolique : synthèse protéique max dans les 30 min post-effort'}
   ]},
-  {day:'Mardi — Hyrox 19h',kcal:1798,prot:164,gluc:191,meals:[
+  {day:'Mardi',kcal:1798,prot:164,gluc:191,meals:[
     {l:'Petit-déjeuner',n:'Œufs brouillés & avocat',i:'3 œufs brouillés · ½ avocat · tomate',w:'Protéines + graisses saines le matin · cholestérol des œufs = précurseur testostérone'},
     {l:'Déjeuner · boulot',n:'Bowl poulet riz épinards',i:'160g poulet effiloché · 120g riz SG · épinards · huile d\'olive · herbes',w:'Protéine maigre + glucides = énergie disponible pour le Hyrox du soir'},
-    {l:'Collation 16h · pré-Hyrox',n:'Flocons avoine + beurre d\'amande + skyr',i:'40g flocons avoine SG · 1cs beurre d\'amande · 150g skyr · 1h30 avant Hyrox',w:'Glucides rapides + protéines légères = énergie sans lourdeur digestive'},
+    {l:'Collation 16h · pré-Hyrox',n:'Flocons avoine + beurre de cacahuète + skyr',i:'40g flocons avoine SG · 1cs beurre de cacahuète · 150g skyr · 1h30 avant Hyrox',w:'Glucides rapides + protéines légères = énergie sans lourdeur digestive'},
     {l:'Dîner post-Hyrox',n:'Steak haché patate douce poivrons',i:'180g steak haché · 160g patate douce · poivrons · moutarde SG + oméga-3',w:'Zinc + fer post-effort = récupération musculaire + reconstitution testostérone nocturne'},
     {l:'Post-Hyrox',n:'Shaker Whey isolat',i:'25-30g whey · eau 300ml · dans l\'heure après',w:''}
   ]},
-  {day:'Mercredi — Pull + Abdos',kcal:1744,prot:164,gluc:197,meals:[
+  {day:'Mercredi',kcal:1744,prot:164,gluc:197,meals:[
     {l:'Petit-déjeuner',n:'Porridge chia banane',i:'60g flocons SG · 1 banane · chia · cannelle · eau chaude',w:'Rapide · 5 min · fibres + glucides complexes'},
     {l:'Déjeuner · boulot',n:'Bowl steak haché lentilles brocoli',i:'150g steak haché · 150g lentilles · brocoli · moutarde SG',w:'Combo fer héminique + non héminique avec Vit C du brocoli = absorption maximale du fer'},
     {l:'Collation 16h',n:'Skyr & fruits rouges',i:'200g skyr · 80g fruits rouges décongelés · emporter en pot',w:'Antioxydants post-effort · réduisent stress oxydatif · bonne peau'},
-    {l:'Dîner pré-séance',n:'Poulet riz haricots verts',i:'180g poulet effiloché · 140g riz · haricots verts · huile d\'olive + oméga-3',w:'Digestion rapide · énergie disponible · pas lourd avant séance Pull'},
+    {l:'Dîner post-séance',n:'Poulet riz haricots verts',i:'180g poulet effiloché · 140g riz · haricots verts · huile d\'olive + oméga-3',w:'Digestion rapide · énergie disponible · pas lourd avant séance Pull'},
     {l:'Post-séance',n:'Shaker Whey isolat',i:'25-30g whey + 5g créatine · eau 300ml',w:''}
   ]},
-  {day:'Jeudi — Course à pied',kcal:1956,prot:174,gluc:234,meals:[
-    {l:'Petit-déjeuner',n:'Porridge protéiné',i:'60g flocons SG · 20g whey vanille · 1 banane · beurre d\'amande · lait végétal SG',w:'Glucides élevés le matin de course = glycogène disponible pour la sortie'},
+  {day:'Jeudi',kcal:1956,prot:174,gluc:234,meals:[
+    {l:'Petit-déjeuner',n:'Porridge protéiné',i:'60g flocons SG · 20g whey vanille · 1 banane · beurre de cacahuète · lait végétal SG',w:'Glucides élevés le matin de course = glycogène disponible pour la sortie'},
     {l:'Déjeuner · boulot',n:'Bowl poulet patate douce wok',i:'160g poulet effiloché · 160g patate douce · mélange wok SG · tamari SG',w:'Glucides complexes + protéine maigre = énergie soutenue toute l\'après-midi'},
     {l:'Collation 16h',n:'Fromage blanc & amandes',i:'150g fromage blanc 0% · 25g amandes · emporter en pot',w:'Caséine lente entre les repas · zinc + magnésium des amandes'},
     {l:'Dîner post-run',n:'Saumon riz brocoli épinards + oméga-3',i:'160g saumon · 150g riz SG · brocoli + épinards · citron · huile d\'olive',w:'2ème dose oméga-3 de la semaine · récupération musculaire · peau + articulations'},
     {l:'Post-run',n:'Shaker Whey isolat',i:'25-30g whey + 5g créatine · eau 300ml',w:''}
   ]},
-  {day:'Vendredi — Legs',kcal:1980,prot:168,gluc:238,meals:[
+  {day:'Vendredi',kcal:1980,prot:168,gluc:238,meals:[
     {l:'Petit-déjeuner',n:'Œufs & avocat',i:'3 œufs brouillés · ½ avocat · ½ banane · tomates cerises',w:'Graisses + protéines le matin de legs = testostérone + récupération'},
     {l:'Déjeuner · boulot',n:'Bowl poulet riz épinards',i:'180g poulet effiloché · 140g riz SG · épinards · huile d\'olive · citron',w:'Charge glucidique élevée avant séance Legs intense du soir'},
-    {l:'Collation 16h',n:'Banane + beurre d\'amande + skyr',i:'1 banane · 1cs beurre d\'amande · 150g skyr · 1h30 avant séance',w:'Glucides rapides + protéines = énergie séance Legs'},
+    {l:'Collation 16h',n:'Banane + beurre de cacahuète + skyr',i:'1 banane · 1cs beurre de cacahuète · 150g skyr · 1h30 avant séance',w:'Glucides rapides + protéines = énergie séance Legs'},
     {l:'Dîner post-Legs',n:'Bœuf haché riz lentilles + oméga-3',i:'150g bœuf haché · 120g riz SG · 100g lentilles · curcuma + poivre · huile d\'olive',w:'Charge protéique maximale après séance Legs lourde · zinc + fer = testostérone nocturne'},
     {l:'Post-séance',n:'Shaker Whey isolat',i:'25-30g whey + 5g créatine · eau 300ml',w:''}
   ]}
@@ -909,7 +909,7 @@ const mealColors = {
   'Petit-déjeuner':'#F0C060',
   'Déjeuner':'#50DC78','Déjeuner · boulot':'#50DC78',
   'Collation':'#60A8FF','Collation 16h':'#60A8FF','Collation 16h · pré-Hyrox':'#60A8FF',
-  'Dîner':'#FF8FAD','Dîner pré-séance':'#FF8FAD','Dîner post-Hyrox':'#FF8FAD','Dîner post-run':'#FF8FAD','Dîner post-Legs':'#FF8FAD',
+  'Dîner':'#FF8FAD','Dîner post-séance':'#FF8FAD','Dîner post-Hyrox':'#FF8FAD','Dîner post-run':'#FF8FAD','Dîner post-Legs':'#FF8FAD',
   'Post-séance':'#C9A84C','Post-Hyrox':'#C9A84C','Post-run':'#C9A84C',
 };
 
@@ -1003,14 +1003,14 @@ const coursesData = [
   ]},
   {cat:'🥑 Lipides & Oléagineux',items:[
     {nm:'Huile d\'olive',qty:'500 ml'},{nm:'Avocats',qty:'×4'},{nm:'Amandes',qty:'150 g'},
-    {nm:'Noix de cajou',qty:'100 g'},{nm:'Beurre d\'amande',qty:'200 g'},{nm:'Graines de chia',qty:'100 g'}
+    {nm:'Noix de cajou',qty:'100 g'},{nm:'Beurre de cacahuète',qty:'200 g'},{nm:'Graines de chia',qty:'100 g'}
   ]},
   {cat:'🍓 Fruits & Antioxydants',items:[
     {nm:'Fruits rouges surgelés',qty:'500 g'},{nm:'Myrtilles fraîches',qty:'125 g'},{nm:'Citrons',qty:'×4'},{nm:'Pommes 🍏',qty:'×4'}
   ]},
   {cat:'🧴 Condiments & Divers',items:[
     {nm:'Tamari sans gluten',qty:'1 bouteille'},{nm:'Moutarde SG',qty:'1 pot'},
-    {nm:'Curcuma poudre',qty:'1 pot'},{nm:'Poivre noir moulu',qty:'1 moulin'},{nm:'Bouillon poulet SG',qty:'×4 cubes'},{nm:'Gingembre frais 🫚',qty:'1 morceau'},{nm:'Eau plate / gazeuse',qty:'× 6 L min'}
+    {nm:'Curcuma poudre',qty:'1 pot'},{nm:'Poivre noir moulu',qty:'1 moulin'},{nm:'Bouillon poulet SG',qty:'×4 cubes'},{nm:'Gingembre frais 🫚',qty:'1 morceau'},{nm:'Eau plate',qty:'× 6 L min'}
   ]},
   {cat:'💊 Compléments à vérifier',items:[
     {nm:'Créatine Monohydrate',qty:'5g/j'},{nm:'Whey Isolat Eiyolab',qty:'25-30g/séance'},
